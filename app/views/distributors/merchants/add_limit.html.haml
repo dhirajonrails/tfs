@@ -1,0 +1,41 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 Add Limit
+      .row
+        .col-xs-12
+          = form_for(:change_limit, :url => "/distributors/merchants/create_add_limit",:html => {:class => "form-horizontal", :role => "form", id:'disMerchantAddLimitForm'}, method: 'post') do |f|
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "search_dis_merchant" }   Merchant ID :
+              .col-sm-5
+                %input#search_dis_merchant.col-xs-12.col-sm-12{name: 'mobile','maxlength'=>10, type: 'text', :placeholder => ("Merchant ID")}
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "merchant_name"}  Name :
+              .col-sm-5
+                %input.col-xs-12.col-sm-12{id: "merchant_name", placeholder: "Merchant Name", type: "text", :readonly => ''}
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "change_note"}  Note :
+              .col-sm-5
+                = f.text_area :note, :class => 'form-control', :id => 'change_note', :placeholder => ("Default Text")  
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "change_amount"}  Limit :
+              .col-sm-5
+                = f.text_field :amount, :class => 'col-xs-12 col-sm-12', :id => 'change_amount', :placeholder => ("Enter the amount to add")
+            .form-group{:style => "border:1px solid red;padding:5px;background:currentcolor;"}
+              %label.col-sm-3.control-label.no-padding-right
+                %span{:style => "color:red;font-size:20px;"} Quick Limit
+                = check_box_tag "change_limit[quick_request]",true,false, :type => "checkbox"
+            .form-group
+              .clearfix.form-actions
+                .col-md-offset-3.col-md-9
+                  = f.submit "Add Limit", value: 'Add Limit', :class =>"btn btn-info submitbtn" do
+                    %i.ace-icon.fa.fa-check.bigger-110
+                      ADD LIMIT
+
+= javascript_include_tag 'distributors/change_limit.js'
+:javascript
+  $(document).ready(function(){
+    validation = new Validation('Forms')
+    validation.validate_limit('#disMerchantAddLimitForm')
+  })        

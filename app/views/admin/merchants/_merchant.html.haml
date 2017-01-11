@@ -1,0 +1,23 @@
+- merchants.each do |merchant|
+  .itemdiv.dialogdiv.merchantList
+    .body{class: "user-#{merchant.user.status}"}
+      .time
+        %span.green= format_date(merchant.created_at) rescue nil
+      .name.fs14
+        %a{:href => "#"}
+          %span 
+            = fullname(merchant.profile.first_name, merchant.profile.last_name) rescue nil
+          %span
+            = "(#{merchant.mobile})"  rescue nil
+      .text.fs14
+        %span.limitsectionheading Name Of Business :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= merchant.profile.name_of_business rescue '-'
+        %span.limitsectionheading Status :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= merchant.user.status.capitalize
+        %span.limitsectionheading Limit:
+        %span.limitContent= merchant.balance_limit
+      .tools
+        %a.btn.btn-minier.btn-info{:href => "#"}
+          %i.icon-only.ace-icon.fa.fa-share

@@ -1,0 +1,241 @@
+/ banner
+.banner1
+  .header
+    .container
+      %nav.navbar.navbar-default
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          .logo
+            %h1
+              %a.navbar-brand{:href => '/'} TELF
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse.nav-wil
+          %nav#link-effect-4.link-effect-4
+            %ul.nav.navbar-nav
+              %li.active
+                %a{"data-hover" => "Home", :href => '/'} Home
+              %li
+                %a{"data-hover" => "Services", :href => "services"} Services
+              %li
+                %a{"data-hover" => "Gallery", :href => "gallery"} Gallery
+              %li
+                %a{"data-hover" => "Contact US", :href => "mail"} Contact US
+              %li
+                %a{"data-hover" => "Login", :href => "users/sign_in"} Login
+        / /.navbar-collapse
+  .container1
+    .container1.americanbannerWrapper
+      #myCarousel.carousel.slide{"data-ride" => "carousel"}
+        / Indicators
+        %ol.carousel-indicators
+          %li.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+          %li{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+          %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+          %li{"data-slide-to" => "3", "data-target" => "#myCarousel"}
+        / Wrapper for slides
+        .carousel-inner{:role => "listbox"}
+          .item.active
+            = image_tag("internet-1593378_1920.jpg", :alt => "rss feed", :style => "height:450px;width:100%;")
+          .item
+            = image_tag("hero_banner2.jpg", :alt => "Chania", :style => "height:450px;width:100%;")
+            / %img{:alt => "", :src => "images/hero_banner2.jpg", :style => "height:450px;width:100%;"}/
+          .item
+            = image_tag("homepage_banner3.png", :alt => "Flower", :style => "height:450px;width:100%;")
+            / %img{:alt => "Flower", :src => "images/homepage_banner3.png", :style => "height:450px;width:100%;"}/
+          /
+            <div class="item">
+            <img src="images/internet-1593378_1920.jpg" alt="Flower" style="height:420px;width:100%;">
+            </div>
+        / Left and right controls
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+          %span.sr-only Previous
+        %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+          %span.sr-only Next
+/ //banner
+/ banner-bottom
+#banner-bottom.banner-bottom
+  .container
+    %h4
+      %span>
+      About Us
+    %p.quia
+      Time is money! Everybody is busy in growth for a better tomorrow. Traverse Eco Life Foundation is ready to spend its valuable time to save yours. Rural to urban, connecting people from all over the globe is our mission. Our first step towards it is making every money transfer easier, smoother and quicker for you. It becomes tedious at banks and third party agencies but is very cost effective and user friendly by our standards. Sending or receiving money is just like handing it over from one hand to another. No documentation needed and receipt would be provided for every transfer between any part of the world. Each transfer is a loved share that has our assured care.
+    %p.quia
+      Traverse eko life foundation came as a solution to the next generation of money movers who like to do things at their own time and pace. Through our portal, you can sit at the comfort of your home, office or pretty much anywhere, and send money to anywhere! Through our strong network of correspondent banks and payment agents, your money will reach its destination with no hassles. Our customer service team works round-the-clock to ensure you have an enhanced experience transferring money online..
+    .banner-bottom-grids
+      .col-md-6.banner-bottom-grid-left
+        %ul
+          %li
+            %i 1.
+            %a.link.link--kumya{:href => "child_growth"}
+              %span{"data-letters" => "Child Growth"} Child Growth
+          .clearfix
+          %li
+            %i 2.
+            %a.link.link--kumya{:href => "non_profit_dreams"}
+              %span{"data-letters" => "Non Profit Dreams"} Non Profit Dreams
+          .clearfix
+          %li
+            %i 3.
+            %a.link.link--kumya{:href => "worryless_transfers"}
+              %span{"data-letters" => "Worryless Transfers"} Worryless Transfers
+          .clearfix
+          %li
+            %i 4.
+            %a.link.link--kumya{:href => "loss_protection"}
+              %span{"data-letters" => "Loss Protection"} Loss Protection
+          .clearfix
+          %li
+            %i 5.
+            %a.link.link--kumya{:href => "#"}
+              %span{"data-letters" => "Non-profit organizations (NGOs)\n"}
+                Non-profit organizations (NGOs)
+          .clearfix
+          %li
+            %i 6.
+            %a.link.link--kumya{:href => "#"}
+              %span{"data-letters" => "Small-to-medium sized businesses"} Small-to-medium sized businesses
+      .col-md-6.banner-bottom-grid-right
+        .grid
+          %figure.effect-zoe
+            = image_tag("payment-473685_1920.jpg",class: 'img-responsive', :alt => "Chania", :style => "height:450px;width:100%;")
+            %figcaption
+              %h3
+                TELF
+                %span Bizz
+              /
+                <p class="icon-links">
+                <a href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span></a>
+                </p>
+                <p class="description">Ut enim ad minim veniam quisadminim nostrudcommodo exercitation.</p>
+      .clearfix
+/ //banner-bottom
+/ welcome
+.welcome
+  .container
+    %h3
+      %span>
+      Why choose Traverse eko life foundation
+    .welcome-grids
+      .col-md-3.welcome-grid
+        %i.glyphicon.glyphicon-user{"aria-hidden" => "true"}
+        %h4
+          %a.link.link--kumya{:href => ""} Low cost
+        %p Our low fees and exchange rates are shown upfront.
+      .col-md-3.welcome-grid
+        %i.glyphicon.glyphicon-signal{"aria-hidden" => "true"}
+        %h4
+          %a.link.link--kumya{:href => ""} Fast
+        %p Get your money to family and friends in minutes.
+      .col-md-3.welcome-grid
+        %i.glyphicon.glyphicon-cog{"aria-hidden" => "true"}
+        %h4
+          %a.link.link--kumya{:href => ""} Simple
+        %p It’s easy to use and we’re here to help round the clock.
+      .col-md-3.welcome-grid
+        %i.glyphicon.glyphicon-cog{"aria-hidden" => "true"}
+        %h4
+          %a.link.link--kumya{:href => ""} Trusted
+        %p We’ve sent millions of transfers to over india and onther country
+      .clearfix
+.counterup
+  .container
+    .col-md-4.counterup-left
+      %h4 User
+      %p.counter 25,60,22,129
+      .services-bottom-left-grid
+        %i.glyphicon.glyphicon-eye-open{"aria-hidden" => "true"}
+    .col-md-4.counterup-left
+      %h4 Merchant
+      %p.counter
+        = Merchant.count
+      .services-bottom-left-grid
+        %i.glyphicon.glyphicon-hourglass{"aria-hidden" => "true"}
+    .col-md-4.counterup-left
+      %h4 Distributor
+      %p.counter
+        = Distributor.count
+      .services-bottom-left-grid
+        %i.glyphicon.glyphicon-stats{"aria-hidden" => "true"}
+    .clearfix
+    / Stats-Number-Scroller-Animation-JavaScript
+    :javascript
+      jQuery(document).ready(function( $ ) {
+        $('.counter').counterUp({
+          delay: 20,
+          time: 1000
+        });
+      });
+    / //Stats-Number-Scroller-Animation-JavaScript
+/ //counterup
+/ footer
+.footer
+  .container
+    .col-md-3.footer-left
+      %h2
+        %a{:href => "/"} TELF
+    .col-md-6.footer-left
+      %ul.foot-nav
+        %li
+          %a{:href => "/"} Home
+        %li
+          %a{:href => "services"} Services
+        %li
+          %a{:href => "gallery"} Gallery
+        %li
+          %a{:href => "mail"} Conatct us
+        %li
+          %a{:href => "users/sign_in"} Login
+      .footer-line
+      %ul.footbo
+        %li
+          %a{:href => "mail"}
+            %span.glyphicon.glyphicon-map-marker{"aria-hidden" => "true"}
+            Show on map
+        %li
+          %a{:href => "mailto:sanjaygupta9011@gmail.com"}
+            %span.glyphicon.glyphicon-send{"aria-hidden" => "true"}>
+            sanjaygupta9011@gmail.com
+    .col-md-3.footer-left
+      %ul.social-icons
+        %li
+          %a.icon-button.facebook{:href => "#"}
+            %i.icon-facebook
+            %span
+        %li
+          %a.icon-button.instagram{:href => "#"}
+            %i.icon-instagram
+            %span
+        %li
+          %a.icon-button.twitter{:href => "#"}
+            %i.icon-twitter
+            %span
+        %li
+          %a.icon-button.g-plus{:href => "#"}
+            %i.icon-g-plus
+            %span
+      %ul.footer-number
+        %li 0251-2972019
+    .clearfix
+    %p
+      © 2016 TELF. All rights reserved | Design by
+      %a{:href => "http://pandeybrajesh.com/"} Brajesh Pandey
+/ //footer
+/ for bootstrap working
+/ //for bootstrap working
+/ here stars scrolling icon
+:javascript
+  $(document).ready(function() {
+              
+    $().UItoTop({ easingType: 'easeOutQuart' });
+              
+    });

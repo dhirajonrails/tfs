@@ -1,0 +1,122 @@
+= form_for(@sender, :html => {:class => "form-horizontal", id: 'userRegisterForm', :role => "form"}) do |sender|
+  #senderRegisterBox.registerBox.hide.mtm160
+    .form-group#existingSenderData.hide
+      .col-sm-2
+        .row
+          .col-sm-7.col-sm-offset-5
+            .ace-settings-item{:style => "float:left;"}
+              %input#existingSenderCheck.ace.ace-checkbox-2{:type => "checkbox"}
+                %label.lbl{:for => "ace-settings-navbar"} Existing Sender
+      .col-sm-2{:style => "display: block;"}
+        %select#existingSender.col-xs-12.col-sm-12.hide{ :include_blank => true, :onchange => "getSenderDetails(this.value);" }
+    :javascript
+      function getSenderDetails(ac_no) {
+         window.SenderRegister.getSenderDetail(ac_no)
+        }  
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Sender Name :
+      .col-sm-5
+        = sender.text_field :name, :class => 'senderRegister form-control registerForm', :id => 'senderName', :placeholder => ("Enter Sender's Name")
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Sender Mobile No :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+            %i.ace-icon.fa.fa-phone
+          = sender.text_field :mobile, :class => 'senderRegister form-control col-xs-12 col-sm-12 registerForm','maxlength'=>10, :id => 'senderMobile', required: true
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Id Proof :
+      .col-sm-5
+        = sender.select :id_proof, Sender::ID_PROOF.collect{ |k, v| [v, k] },:class =>'form-control senderRegister registerForm',  title: "Select an ID Proof"
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Sender Address :
+      .col-sm-5
+        = sender.text_field :address, :class => 'senderRegister form-control col-xs-12 col-sm-12 registerForm', :id => 'senderAddress', :placeholder => ("Address")
+
+  = sender.fields_for :beneficiaries, @beneficiaries do |ben|
+    #beneficiaryRegisterBox.registerBox.hide
+      .form-group#existingBenData.hide
+        .col-sm-2
+          .row
+            .col-sm-7.col-sm-offset-5
+              .ace-settings-item{:style => "float:left;"}
+                %input#existingBeneficiaryCheck.ace.ace-checkbox-2{:type => "checkbox"}
+                  %label.lbl{:for => "ace-settings-navbar"} Existing Beneficiary
+        .col-sm-2{:style => "display: block;"}
+          .btn-group.pull-right#existingBeneficiary
+            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+              Select a Beneficiary
+              %span.caret
+            %ul.dropdown-menu#existingBeneficiaryFill
+      :javascript
+        function getBeneficiaryDetails(ac_no) {
+           window.SenderRegister.getBeneficiaryDetail(ac_no)
+          }          
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Beneficiary Name :
+        .col-sm-5
+          = ben.text_field :name, :class => 'form-control beneficiaryRegister registerForm', :id => 'beneficiaryName', :placeholder => ("Enter Beneficiary's Name")
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Beneficiary Account Number :
+        .col-sm-5
+          = ben.text_field :account_number, :class => 'form-control beneficiaryRegister registerForm', :id => 'beneficiaryAccount', :placeholder => ("Enter account number"), oninvalid: "InvalidMsg(this);", onInput: "InvalidMsg(this);"
+        :javascript
+          function InvalidMsg(textbox) {
+              if (textbox.value == '') {
+                  textbox.setCustomValidity('Required Account Number');
+              }
+              else if (!(/^[0-9]*$/.test(textbox.value))){
+                  textbox.setCustomValidity('Only number allowed');
+              }
+              else if (textbox.value.length> 18){
+                  textbox.setCustomValidity('Max 18 digits allowed');
+              }
+              else {
+                 textbox.setCustomValidity('');
+              }
+              return true;
+          }        
+
+      = render :partial => 'bank_form'
+
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} Amount To Transfer :
+        .col-sm-5
+          = text_field_tag 'transaction[amount]','', :class => 'form-control registerForm', :id => 'form-field-8', :placeholder => ("Enter Amount to transfer"), id: 'amount_to_transfer', oninvalid: "InvalidMsgBox(this);", onInput: "InvalidMsgBox(this);"
+        :javascript
+          function InvalidMsgBox(textbox) {
+              if (textbox.value == '') {
+                  textbox.setCustomValidity('Required Amount');
+              }
+              else if (!(/^[0-9]*$/.test(textbox.value))){
+                  textbox.setCustomValidity('Only number allowed');
+              }
+              else if (textbox.value <  500){
+                  textbox.setCustomValidity('Min 500 allowed');
+              }
+              else if (textbox.value> 25000){
+                  textbox.setCustomValidity('Max 25000 allowed');
+              }
+              else {
+                 textbox.setCustomValidity('');
+              }
+              return true;
+          }        
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Total :
+        .col-sm-5
+          = text_field_tag :total,'', :class => 'form-control registerForm', :id => 'transfer_amount_total', readonly: true
+        .col-sm-2
+          .form-group{:style => "border:1px solid red;padding:5px;background:currentcolor;"}
+            .ace-settings-item
+              %label.lbl{:for => "ace-settings-navbar"}
+                %span{:style => "color:red;font-size:20px;"} Quick Transfer
+                = check_box_tag 'transaction[quick_transfer]',true,false,:style => "padding: 2px 2px 3px !important;", :type => "checkbox",:class=>"bootstrap"
+      .form-group
+        .clearfix.form-actions
+          .col-md-offset-3.col-md-9
+            %input.btn.btn-info#submitRegister{name: "Register", type: "submit", value: "Register"}
+              %i.ace-icon.fa.fa-check.bigger-110
+            &nbsp; &nbsp; &nbsp;
+            %input.btn.btn-info#resetRegister{name: "Reset", type: "button", value: "Reset"}
+              %i.ace-icon.fa.fa-undo.bigger-110

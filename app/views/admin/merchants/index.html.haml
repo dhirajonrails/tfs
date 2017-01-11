@@ -1,0 +1,77 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 View All Merchants
+        .row.mt50
+          .col-xs-12
+            .row
+              = form_tag '/admin/merchants/search_merchant', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchMerchantForm'} do |f|
+                .col-sm-6
+                  .col-sm-2
+                    %lable
+                      Search                          
+                  .col-sm-3
+                    = text_field_tag :search, params[:search], class: 'form-control', :id => "merchant_id"
+                  .col-sm-4
+                    = submit_tag "GO", value: 'search', :class =>"btn btn-info"            
+              .col-xs-12
+                %div
+                - if @merchants.present?
+                  = paginate @merchants, :window => 5 unless @merchants.empty?
+                  %table.table.table-bordered.table-striped.table-hover.content
+                    %thead
+                      %tr
+                        %th Action
+                        %th Status
+                        %th Distributor
+                        %th MerchantID
+                        %th MerchantName
+                        %th Name Of Business
+                        %th Date Of Birth
+                        %th Address 
+                        %th Email
+                        %th Mobile No
+                        %th Reference Name
+                        %th Created Date
+                    %tbody
+                      - @merchants.each do |merchant|
+                        %tr
+                          %td
+                            .hidden-sm.hidden-xs.action-buttons
+                              %a.green{href: edit_admin_merchant_path(merchant)}
+                                %i.ace-icon.fa.fa-pencil.bigger-130
+                              %a.red{href: "#"}
+                                %i.ace-icon.fa.fa-trash-o.bigger-130
+                          %td.hidden-480
+                            - if merchant.user.status == 'active'
+                              %span.label.label-sm.label-warning Active
+                            - else
+                              %span.label.label-sm.label-warning Inactive                          
+                          %td
+                            %span 
+                              = merchant.distributor.profile.first_name rescue nil
+                              %br
+                            %span
+                              = merchant.distributor.user.mobile rescue nil
+                          %td
+                            = merchant.user.try(:mobile) rescue nil
+                          %td
+                            = fullname(merchant.profile.try(:first_name),merchant.profile.try(:last_name)) rescue nil
+                          %td
+                            = merchant.profile.try(:name_of_business) rescue nil
+                          %td
+                            = merchant.profile.try(:dob) rescue nil
+                          %td
+                            = merchant.profile.try(:address1) rescue nil
+                          %td
+                            = merchant.user.try(:email) rescue nil
+                          %td
+                            = merchant.user.try(:mobile) rescue nil
+                          %td
+                            = merchant.profile.try(:reference_name) rescue nil
+                          %td
+                            = format_date(merchant.user.created_at) rescue nil    
+                  = paginate @merchants, :window => 5 unless @merchants.empty?
+                - else
+                  %h4 No Merchant Present

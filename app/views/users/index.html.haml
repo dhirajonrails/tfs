@@ -1,0 +1,7 @@
+Hello
+- if current_user.has_role?('admin') 
+  = "#{current_user.admin.profile.first_name} #{current_user.admin.profile.last_name}"
+- elsif current_user.has_role?('merchant')
+  = "#{current_user.merchant.profile.first_name} #{current_user.merchant.profile.last_name}"
+- elsif current_user.has_role?('distributor')
+  = "#{current_user.distributor.profile.first_name} #{current_user.distributor.profile.last_name}"

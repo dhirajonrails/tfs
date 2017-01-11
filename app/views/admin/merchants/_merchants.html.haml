@@ -1,0 +1,24 @@
+.widget-box
+  .widget-header
+    .col-sm-12
+      .col-sm-6.pt5
+        %span.fs18 Total Merchant:
+        %span.fs18= "##{Merchant.count}"
+      .col-sm-6.pt5
+        %span.fs18 Active Merchant :
+        %span.fs18= "#{User.with_role(:merchant).where(status: 'active').count}"
+  .widget-body
+    .widget-main.no-padding
+      .dialogs#merchantList
+        = render partial: 'admin/merchants/merchant', locals: { merchants: merchants }
+        - unless merchants.current_page == merchants.total_pages
+          %p#view-more-merchant
+            %a{href: 'javascript:void(0)'} view more
+      %form
+        .form-actions
+          .input-group
+            %input.form-control{:name => "message", :placeholder => "Type your message here ...", :type => "text"}/
+            %span.input-group-btn
+              %button.btn.btn-sm.btn-info.no-radius{:type => "button"}
+                %i.ace-icon.fa.fa-share
+                SEARCH

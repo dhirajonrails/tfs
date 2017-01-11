@@ -1,0 +1,15 @@
+%table#sample-table-2.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th Distributor
+      %th Distributor_ID
+      %th Balance
+  %tbody
+    - @distributors.each do |distributor|  
+      %tr 
+        %td 
+          = distributor.user.mobile rescue nil
+        %td
+          = fullname(distributor.try(:profile).try(:first_name), distributor.try(:profile).try(:last_name))  rescue nil
+        %td
+          = distributor.balance_limit  rescue nil

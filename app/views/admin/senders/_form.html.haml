@@ -1,0 +1,52 @@
+= form_for(@transaction, url: admin_sender_path(@transaction),:html => {:class => "form-horizontal", id: 'userRegisterForm', :role => "form"}) do |sender|
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} TRANSACTION ID :
+    .col-sm-5
+      = sender.text_field :txt_id, :class => 'form-control', :id => 'form-field-8', readonly: true
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} Transaction Time :
+    .col-sm-5
+      = sender.text_field :created_at, :class => 'form-control', :id => 'form-field-8', value: format_date(@transaction.created_at), readonly: true
+  #senderRegisterBox.registerBox
+  = sender.fields_for :beneficiary, @beneficiary do |ben|
+    #beneficiaryRegisterBox.registerBox
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Beneficiary Name :
+        .col-sm-5
+          = ben.text_field :name, :class => 'form-control beneficiaryRegister', :id => 'beneficiaryName', readonly: true
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Beneficiary Account Number :
+        .col-sm-5
+          = ben.text_field :account_number, :class => 'form-control beneficiaryRegister', :id => 'beneficiaryAccount', readonly: true
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Beneficiary IFSC Code :
+        .col-sm-5
+          = ben.text_field :ifsc_code, :class => 'form-control beneficiaryRegister',:id => 'beneficiaryIfsc', readonly: true
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} Amount To Transfer :
+        .col-sm-5
+          = sender.text_field :amount, :class => 'form-control', :id => 'form-field-8', readonly: true
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} STATUS:
+        - if sender.object.status == 'REJECT/RETURN'
+          .col-sm-5
+            = sender.select :status, Transaction::STATUS.collect{ |k, v| [v, k] }, {}, { :selected => sender.object.status, :disabled=>true }
+        - else
+          .col-sm-5
+            = sender.select :status, Transaction::STATUS.collect{ |k, v| [v, k] }, :selected => sender.object.status
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} Admin Remark:
+        .col-sm-5
+          = sender.text_area :admin_remark, :class => 'form-control', :id => 'form-field-8'
+      .form-group
+        %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1"} Merchant Remark:
+        .col-sm-5
+          = sender.text_area :merchant_remark, :class => 'form-control', :id => 'form-field-8'          
+      .form-group
+        .clearfix.form-actions
+          .col-md-offset-3.col-md-9
+            %input.btn.btn-info#submitRegister{name: "Update", type: "submit", value: "Update"}
+              %i.ace-icon.fa.fa-check.bigger-110
+            &nbsp; &nbsp; &nbsp;
+            %input.btn.btn-info#resetRegister{name: "Reset", type: "button", value: "Reset"}
+              %i.ace-icon.fa.fa-undo.bigger-110

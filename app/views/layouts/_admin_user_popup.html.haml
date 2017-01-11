@@ -1,0 +1,49 @@
+#addAdminModal.modal.fade{"aria-labelledby" => "addAdminLabel", :role => "dialog", :tabindex => "-1", 'data-user-id' => '' }
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#addAdminLabel.modal-title 
+          New Admin
+      = form_for(@user = User.new, url: '', :html => {id: 'newAdminForm', :role => "form"}) do |user|
+        .modal-body
+          .widget-box
+            .widget-body#createAdminBody
+              .widget-main.no-padding
+                .dialogs
+                  .body
+                    = user.fields_for :admin, @user.build_admin do |adm|
+                      = adm.fields_for :profile, @user.admin.build_profile do |pro|
+                        .form-group
+                          %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} First Name :
+                          .input-group
+                            %span.input-group-addon 
+                            = pro.text_field :first_name, :id => "form-field-mask-2",:placeholder=>"First Name", type: "text",required: 'required'
+                        .form-group
+                          %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Last Name :
+                          .input-group
+                            %span.input-group-addon
+                            = pro.text_field :last_name, :id => "form-field-mask-2",:placeholder=>"Last Name", type: "text", required: 'required'
+                        .form-group
+                          %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Mobile :
+                          .input-group
+                            %span.input-group-addon 
+                            = user.text_field :mobile, :id => "form-field-mask-2",:placeholder=>"Mobile", type: "text",required: 'required'
+                        .form-group
+                          %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Email :
+                          .input-group
+                            %span.input-group-addon 
+                            = user.email_field :email, :id => "form-field-mask-2",:placeholder=>"Email", type: "text",required: 'required'
+                        .form-group
+                          %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} DOB :
+                          .input-group
+                            %span.input-group-addon
+                            = pro.text_field :dob, :id => "form-field-mask-2",:placeholder=>"Date Of Birth", type: "text"         
+                        .form-group
+                          %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Status:
+                          .input-group
+                            = user.select :status, options_for_select(['active', 'inactive']), :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2"
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} CLOSE
+          %input.btn.btn-primary#create_admin{ :type => "submit", :value => 'CREATE' }

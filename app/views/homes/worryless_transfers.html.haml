@@ -1,0 +1,112 @@
+.banner1
+  .container
+    %nav.navbar.navbar-default
+      / Brand and toggle get grouped for better mobile display
+      .navbar-header
+        %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        .logo
+          %h1
+            %a.navbar-brand{:href => "/"} TELF
+      / Collect the nav links, forms, and other content for toggling
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse.nav-wil
+        %nav#link-effect-4.link-effect-4
+          %ul.nav.navbar-nav
+            %li
+              %a{"data-hover" => "Home", :href => "/"} Home
+            %li.active
+              %a{"data-hover" => "Services", :href => "services"} Services
+            %li
+              %a{"data-hover" => "Gallery", :href => "gallery"} Gallery
+            %li
+              %a{"data-hover" => "Contact US", :href => "mail"} Contact US
+            %li
+              %a{"data-hover" => "Login", :href => "users/sign_in"} Login
+      / /.navbar-collapse
+/ //banner
+/ single
+.single
+  .container
+    .single-grids
+      .col-md-12.single-grid-left
+        %h3 Worryless Transfers
+        = image_tag("10.jpg",class: 'img-responsive', :alt => "Chania") 
+        %p.sequi
+          The limitations of regulations keep growing with the improvement in the financial services. We tackle all the issues and make the process of sending and receiving money the most swift.
+          No hidden charges and no add interests of any sort on of your transfers with us. Going to banks is an old method, we have modernized the processes to give you most comfortable service.
+      .clearfix
+
+/ footer
+.footer
+  .container
+    .col-md-3.footer-left
+      %h2
+        %a{:href => "/"} TELF
+    .col-md-6.footer-left
+      %ul.foot-nav
+        %li
+          %a{:href => "/"} Home
+        %li
+          %a{:href => "services"} Services
+        %li
+          %a{:href => "gallery"} Gallery
+        %li
+          %a{:href => "mail"} Conatct us
+        %li
+          %a{:href => "users/sign_in"} Login
+      .footer-line
+      %ul.footbo
+        %li
+          %a{:href => "mail.html"}
+            %span.glyphicon.glyphicon-map-marker{"aria-hidden" => "true"}
+            Show on map
+        %li
+          %a{:href => "mailto:sanjaygupta9011@gmail.com"}
+            %span.glyphicon.glyphicon-send{"aria-hidden" => "true"}>
+            sanjaygupta9011@gmail.com
+    .col-md-3.footer-left
+      %ul.social-icons
+        %li
+          %a.icon-button.facebook{:href => "#"}
+            %i.icon-facebook
+            %span
+        %li
+          %a.icon-button.instagram{:href => "#"}
+            %i.icon-instagram
+            %span
+        %li
+          %a.icon-button.twitter{:href => "#"}
+            %i.icon-twitter
+            %span
+        %li
+          %a.icon-button.g-plus{:href => "#"}
+            %i.icon-g-plus
+            %span
+      %ul.footer-number
+        %li 0251-2972019
+    .clearfix
+    %p
+      © 2016 TELF. All rights reserved | Design by
+      %a{:href => "http://pandeybrajesh.com/"} Brajesh Pandey
+/ //footer
+/ for bootstrap working
+/ //for bootstrap working
+/ here stars scrolling icon
+:javascript
+  $(document).ready(function() {
+    /*
+      var defaults = {
+      containerID: 'toTop', // fading element id
+      containerHoverID: 'toTopHover', // fading element hover id
+      scrollSpeed: 1200,
+      easingType: 'linear' 
+      };
+    */
+              
+    $().UItoTop({ easingType: 'easeOutQuart' });
+              
+    });
+/ //here ends scrolling icon

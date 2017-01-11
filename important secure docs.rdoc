@@ -1,0 +1,65 @@
+
+
+password:
+mobile_number's first 4 digits@creation_date
+eg: mob_no:1231231230, date: 60/01/2015
+then password is: 1231@0601
+
+
+
+
+Adding the distributor change functionality
+
+1)
+ActiveRecord::Base.record_timestamps = false
+
+Distributor.all.each do |dis|
+  mobile = dis.user.mobile
+  dis.update(mobile: mobile)
+end
+
+ChangeLimit.where(changable_type:nil).destroy_all
+
+ChangeLimit.all.each do |change|
+  type = change.changable_type
+  id = change.changable_id
+  if type == 'Merchant'
+    user = Merchant.find(id) rescue nil
+    dis = user.distributor.mobile rescue nil
+    change.update(distributor_mobile: dis)
+  end
+end
+
+RequestLimit.where(requestable_id:nil).destroy_all
+
+RequestLimit.all.each do |request|
+  type = request.requestable_type
+  id = request.requestable_id
+  if type == 'Merchant'
+    user = Merchant.find(id) rescue nil
+    dis = user.distributor.mobile rescue nil
+    request.update(distributor_mobile: dis)
+  end
+end
+
+
+Transaction.all.each do |trans|
+  merchant = Merchant.find_by_mobile(trans.merchant_mobile)
+  distributor = merchant.distributor.mobile rescue nil
+  trans.update(distributor_mobile: distributor)
+end
+
+ActiveRecord::Base.record_timestamps = 
+
+
+change the 'admin' role to super admin in db
+roles = ['normal_view_request', 'quick_view_request', 'normal_edit_request', 'quick_edit_request', 'normal_delete_request', 'quick_delete_request', 'normal_update_request', 'quick_update_request', 'distributor_view', 'distributor_new', 'distributor_edit','distributor_update', 'distributor_add_limit','distributor_less_limit', 'distributor_view_limit', 'distributor_limit_history', 'merchant_view', 'merchant_new','merchant_edit', 'merchant_update','merchant_add_limit', 'merchant_less_limit', 'merchant_view_limit', 'merchant_limit_history', 'distributor_limit_request_view', 'distributor_limit_request_edit', 'distributor_limit_request_update', 'distributor_limit_request_delete', 'merchant_limit_request_view', 'merchant_limit_request_edit', 'merchant_limit_request_update', 'merchant_limit_request_delete', 'flash_notification', 'message_notification', 'bank_detail', 'change_user_password', 'admin']
+
+
+roles.each{|role| Role.create(name: role) }
+
+#need to work on download of reports
+
+Transaction.update_all(admin_mobile: '8888900067')
+
+

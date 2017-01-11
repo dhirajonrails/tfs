@@ -1,0 +1,36 @@
+#permissionModal.modal.fade{"aria-labelledby" => "permissionModalLabel", :role => "dialog", :tabindex => "-1", 'data-user-id' => '' }
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#permissionModalLabel.modal-title 
+          Admin Permissions for 
+          %span.red#adminName            
+      .modal-body
+        .widget-box
+          .widget-body
+            .widget-main.no-padding
+              .dialogs
+                .body
+                  %form
+                    %table.table.table-bordered.table-striped
+                      %thead.thin-border-bottom
+                        %tr
+                          %th{width:"2"}
+                            %i.ace-icon.fa.blue>
+                          %th.hidden-480
+                            %i.ace-icon.fa.fa-caret-right.blue>
+                            Permission
+                      %tbody
+                        - Role.where("name NOT IN (?)", ['admin', 'super_admin', 'merchant', 'distributor']).each do |role|
+                          %tr
+                            %td
+                              %span.checkboxWrap
+                                = check_box_tag '',true,false, :type => "checkbox",:class=>"bootstrap permissionCheck", "data-id"=> role.id
+                            %td.hidden-480
+                              %span= role.name.upcase.split('_').join(' ') rescue nil
+      .modal-footer
+        %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} CLOSE
+        %button.btn.btn-primary#submit_permission{:type => "button"} SUBMIT
+

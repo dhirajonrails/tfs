@@ -1,0 +1,163 @@
+.main-container.widthalign
+  .main-content
+    .row
+      .col-sm-10.col-sm-offset-1
+        .login-container
+          .center
+            %h1
+              %span.white.loginpagefontsize
+                Traverse Eko Life Foundation
+          .space-6
+          .position-relative
+            #login-box.login-box.visible.widget-box.no-border
+              .widget-body
+                .widget-main
+                  %h4.header.blue.lighter.bigger
+                    %i.ace-icon.fa.fa-coffee.green
+                      Please Enter Your Information
+                  .space-6
+                  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+                    .errors.flash-error
+                      = flash[:error]
+                    .fieldset
+                      %label.block.clearfix
+                        %span.block.input-icon.input-icon-right
+                          = f.text_field :login, :id=>"login",:class=>"form-control",:placeholder=>"Email/Mobile", type: "text"
+                          %i.ace-icon.fa.fa-user
+                      %label.block.clearfix
+                        %span.block.input-icon.input-icon-right
+                          = f.text_field :password, :id=>"password",:class=>"form-control",:placeholder=>"Password", type: "password"
+                          %i.ace-icon.fa.fa-lock
+                      .space
+                      .clearfix
+                        %label.inline
+                          %input{type: "checkbox"}
+                          %span.lbl Remember Me
+                        %button.width-35.pull-right.btn.btn-sm.btn-primary
+                          Login
+                        %i.ace-icon.fa.fa-key
+                        %span.bigger-110 Login
+                      .space-4
+                  .toolbar.clearfix
+                    .bottom
+                      %a.forgot-password-link{"data-target" => "#forgot-box", "href"=>"#"}
+                        / %i.ace-icon.fa.fa-arrow-left
+                        /   I forgot my password
+                    .bottom
+                      %a.user-signup-link{"data-target" => "#forgot-box", "href"=>"#"}
+                        / %i.ace-icon.fa.fa-arrow-right
+                        /   I want to register
+
+
+          /   #forgot-box.forgot-box.widget-box.no-border
+          /     .widget-body
+          /       .widget-main
+          /         %h4.header.red.lighter.bigger
+          /           %i.ace-icon.fa.fa-key
+          /             Retrieve Password
+          /         .space-6
+          /           Enter your email and to receive instructions
+          /         = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          /           = devise_error_messages!
+          /           .fieldset
+          /             %label.block.clearfix
+          /               %span.block.input-icon.input-icon-right
+          /                 = f.text_field :login, :id=>"forgotEmailLink",:class=>"form-control",:placeholder=>"Email/Mobile", type: "text"
+          /                 %i.ace-icon.fa.fa-envelope
+          /             .clearfix
+          /               %button.width-35.pull-right.btn.btn-sm.btn-danger{type: 'submit'}
+          /                 %i.ace-icon.fa.fa-lightbulb-o
+          /                 %span.bigger-110
+          /                   Send Me!
+          /       .toolbar.center
+          /         %a.back-to-login-link{"data-target"=>"#login-box", "href"=>"#"}
+          /           Back to login
+          /           %i.ace-icon.fa.fa-arrow-right
+
+          /   #signup-box.signup-box.widget-box.no-border
+          /     .widget-body
+          /       .widget-main
+          /         %h4.header.green.lighter.bigger
+          /           %i.ace-icon.fa.fa-users.blue
+          /             New User Registration
+          /         .space-6
+          /         %p
+          /           Enter your details to begin:
+          /         = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          /           .fieldset
+          /             %label.block.clearfix
+          /               %span.block.input-icon.input-icon-right
+          /                 = f.email_field :email, :id=>"registerEmail",:class=>"form-control",:placeholder=>"Email", type: "text"
+          /                 %i.ace-icon.fa.fa-envelope
+          /             %label.block.clearfix
+          /               %span.block.input-icon.input-icon-right
+          /                 = f.text_field :mobile, :id=>"registerUsername",'maxlength'=>10,:class=>"form-control",:placeholder=>"Mobile", type: "text"
+          /                 %i.ace-icon.fa.fa-user
+          /             %label.block.clearfix
+          /               %span.block.input-icon.input-icon-right
+          /                 = f.text_field :password, :id=>"registerPassword",:class=>"form-control",:placeholder=>"Password", type: "text"
+          /                 %i.ace-icon.fa.fa-lock
+          /             %label.block.clearfix
+          /               %span.block.input-icon.input-icon-right
+          /                 = f.text_field :password_confirmation, :id=>"registerPasswordConfirm",:class=>"form-control",:placeholder=>"Confirm Password", type: "text"
+          /                 %i.ace-icon.fa.fa-retweet
+          /             %label.block
+          /               %input{"type"=>"checkbox"}
+          /               %span.lbl
+          /                 I accept the
+          /                 %a{"href"=>"#"}
+          /                   User Agreement
+          /             .space-24
+          /             .clearfix
+          /               %button.width-30.pull-left.btn.btn-sm{"type"=>"reset"}
+          /                 %i.ace-icon.fa.fa-refresh
+          /                 %span.bigger-110
+          /                   Reset
+          /               %button.width-65.pull-right.btn.btn-sm.btn-success{"type"=>"submit"}
+          /                 %span.bigger-110
+          /                   Register
+          /                 %i.ace-icon.fa.fa-arrow-right.icon-on-right
+          /       .toolbar.center
+          /         %a.back-to-login-link{"data-target"=>"#login-box", "href"=>"#"}
+          /           %i.ace-icon.fa.fa-arrow-left
+          /             Back to login
+          / .navbar-fixed-top.align-right
+          /   %a#btn-login-dark{ "href"=>"#" } Dark
+          /   %span.blue
+          /   %a#btn-login-blur{ "href"=>"#" } Blur
+          /   %span.blue
+          /   %a#btn-login-light{ "href"=>"#" } Light
+
+
+:javascript
+  $(function($) {
+    $(document).on('click', '.toolbar a[data-target]', function(e) {
+      e.preventDefault();
+      var target = $(this).data('target');
+      $('.widget-box.visible').removeClass('visible');
+      $(target).addClass('visible');
+    });
+
+    $('#btn-login-dark').on('click', function(e) {
+      e.preventDefault();
+      $('body').attr('class', 'login-layout');
+      $('#id-text2').attr('class', 'white');
+      $('#id-company-text').attr('class', 'blue');
+     });
+
+     $('#btn-login-light').on('click', function(e) {
+      e.preventDefault();
+      $('body').attr('class', 'login-layout light-login');
+      $('#id-text2').attr('class', 'grey');
+      $('#id-company-text').attr('class', 'blue');
+     });
+
+    $('#btn-login-blur').on('click', function(e) {
+      e.preventDefault();
+      $('body').attr('class', 'login-layout blur-login');
+      $('#id-text2').attr('class', 'white');
+      $('#id-company-text').attr('class', 'light-blue');
+     });
+
+    });
+

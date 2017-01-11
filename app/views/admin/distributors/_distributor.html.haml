@@ -1,0 +1,23 @@
+- distributors.each do |distributor|
+  .itemdiv.dialogdiv.distributorList
+    .body{class: "user-#{distributor.user.status}"}
+      .time
+        %span.green= format_date(distributor.created_at) rescue nil
+      .name.fs14
+        %a{:href => "#"}
+          %span 
+            = fullname(distributor.profile.first_name, distributor.profile.last_name) rescue nil
+          %span
+            = "(#{distributor.mobile})"  rescue nil
+      .text.fs14
+        %span.limitsectionheading Name Of Business :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= distributor.profile.name_of_business
+        %span.limitsectionheading Status :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= distributor.user.status.capitalize
+        %span.limitsectionheading Limit:
+        %span.limitContent= distributor.balance_limit
+      .tools
+        %a.btn.btn-minier.btn-info{:href => "#"}
+          %i.icon-only.ace-icon.fa.fa-share

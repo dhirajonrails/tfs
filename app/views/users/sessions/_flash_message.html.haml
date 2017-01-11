@@ -1,0 +1,4 @@
+-if Flash.where(status: true).count != 0
+  .marquee
+    %h4
+      = Flash.where(status: true).first.message rescue nil

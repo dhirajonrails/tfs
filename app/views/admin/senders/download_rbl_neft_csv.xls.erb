@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<ss:Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="xl1">
+    <Font ss:FontName='Calibri' ss:Size='11'/>
+      <Alignment ss:Horizontal='Center' ss:Vertical='Center'/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+    </ss:Style>
+    <ss:Style ss:ID="xl2">
+    <Font ss:FontName='Calibri' ss:Size='11' ss:Bold='1'/>
+      <Alignment ss:Horizontal='Center' ss:Vertical='Center'/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+    </ss:Style>
+
+  </ss:Styles>
+
+  <ss:Worksheet ss:Name="Sheet1">
+    <ss:Table>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='160'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='200'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='100'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='100'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='145'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='170'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='135'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='180'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='180'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='140'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='140'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='140'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='140'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='115'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='125'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='110'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='110'/>
+
+      <ss:Row ss:StyleID='xl2'>
+        <ss:Cell><ss:Data ss:Type="String">Payment Type</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Cust Ref Number</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Source Account Number</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Source Narration</ss:Data></ss:Cell>  
+        <ss:Cell><ss:Data ss:Type="String">Destination Account Number</ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">Currency</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="Number">Amount</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Destination Narration</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Destination bank</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Destination Bank IFS Code</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Beneficiary Name</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Beneficiary Account Type</ss:Data></ss:Cell>  
+        <ss:Cell><ss:Data ss:Type="String">Sender to Receiver 1</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Sender to Receiver 2</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Sender to Receiver 3</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Sender to Receiver 4</ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">Sender to Receiver 5</ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">Cheque Number</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Signatory Code 1</ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">Signatory Code 2</ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">Print Location</ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">Drawn on Location</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Payee Name</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">Corr Bank</ss:Data></ss:Cell>  
+      </ss:Row>
+    <% count = 0 %>
+    <% @results.each do |product| %>
+      <% count = count + 1 %>
+      <ss:Row ss:StyleID='xl1'>
+        <ss:Cell><ss:Data ss:Type="String">NFT</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="Number"><%= count %></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">409000238659</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">To NEFT</ss:Data></ss:Cell>  
+        <ss:Cell><ss:Data ss:Type="String"><%= product.beneficiary_account_number rescue nil%></ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String">INR</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="Number"><%= product.amount rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.beneficiary.ifsc_code rescue nil %></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.beneficiary.name rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">SAVING</ss:Data></ss:Cell>  
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell> 
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>    
+      </ss:Row>
+    <% end %>
+    </ss:Table>
+  </ss:Worksheet>
+</ss:Workbook>
+
+
+
+
+
+
+
+

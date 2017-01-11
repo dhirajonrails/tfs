@@ -1,0 +1,32 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1
+          Merchant View Limit
+      .row
+        .col-xs-12
+          .row
+            .col-xs-12
+              %div
+                - if @merchants.present?
+                  = paginate @merchants, :window => 5
+                  %table#sample-table-2.table.table-striped.table-bordered.table-hover
+                    %thead
+                      %tr
+                        %th Merchant Id
+                        %th Merchant Name
+                        %th Balance
+                        %th QuickBalance
+                    %tbody
+                      - @merchants.each do |merchant|  
+                        %tr 
+                          %td 
+                            = merchant.user.mobile rescue nil
+                          %td
+                            = fullname(merchant.try(:profile).try(:first_name), merchant.try(:profile).try(:last_name)) rescue nil
+                          %td
+                            = merchant.balance_limit rescue nil
+                          %td
+                            = merchant.quick_limit  rescue nil
+                  = paginate @merchants, :window => 5

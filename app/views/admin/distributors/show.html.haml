@@ -1,0 +1,29 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header
+        %h1 New Distributor
+      .row
+        .col-xs-12
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Distributor Name :
+            .col-sm-5
+              .input-group
+                %span.input-group-addon
+                  = fullname(@distributor.profile.first_name, @distributor.profile.last_name)
+      .row
+        .col-xs-12
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Distributor Mobile No :
+            .col-sm-5
+              .input-group
+                %span.input-group-addon
+                  = @distributor.user.mobile
+      .row
+        .col-xs-12
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Distributor Password :
+            .col-sm-5
+              .input-group
+                %span.input-group-addon
+                  = "#{@distributor.user.mobile.first(4)}@#{@distributor.user.created_at.strftime("%d%m")}"                

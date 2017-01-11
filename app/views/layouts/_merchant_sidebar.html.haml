@@ -1,0 +1,43 @@
+#sidebar.sidebar.responsive
+  :javascript
+    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+  %ul.nav.nav-list
+    %li
+      %a{ href: new_sender_path }
+        %i.menu-icon.fa.fa-tachometer
+        %span.menu-text USER REGISTER
+      %b.arrow
+    %li.active
+      %a{"href": senders_path }
+        %i.menu-icon.fa.fa-file-o
+        %span.menu-text SERVICE REQUEST
+      %b.arrow
+    %li.active
+      %a{"href": rejected_request_senders_path }
+        %i.menu-icon.fa.fa-file-o
+        %span.menu-text REJECTED REQUEST
+      %b.arrow      
+    %li
+      %a{ href: new_merchants_request_limit_path }
+        %i.menu-icon.fa.fa-file-o
+        %span.menu-text LIMIT REQUEST
+      %b.arrow
+    %li
+      %a{ href: merchants_request_limits_path }
+        %i.menu-icon.fa.fa-list
+        %span.menu-text VIEW LIMIT REQUEST
+      %b.arrow
+    %li
+      %a{ href: limit_history_merchants_path }
+        %i.menu-icon.fa.fa-pencil-square-o
+        %span.menu-text LIMIT HISTORY
+      %b.arrow
+    %li
+      %a{ "href": "/change_password" }
+        %i.menu-icon.fa.fa-pencil-square-o
+        %span.menu-text CHANGE PASSWORD
+      %b.arrow
+  #sidebar-collapse.sidebar-toggle.sidebar-collapse
+    %i.ace-icon.fa.fa-angle-double-left{ "data-icon1"=> ("ace-icon fa fa-angle-double-left"),  "data-icon2"=> ("ace-icon fa fa-angle-double-right")} 
+  :javascript
+    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}

@@ -1,0 +1,31 @@
+- limit_history.each do |history|
+  - merchant = Merchant.find(history.changable_id) rescue nil
+  .itemdiv.dialogdiv.merchantLimitHistory
+    .body{class: "limit-history-#{history.action}"}
+      .time
+        %span.green= format_date(history.created_at) rescue nil
+      .name.fs14
+        %a{:href => "#"}
+          %span 
+            = fullname(merchant.profile.first_name, merchant.profile.last_name) rescue nil
+          %span
+            = "(#{merchant.mobile})"  rescue nil
+      .text.fs14
+        %span.limitsectionheading Status :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= history.status rescue nil
+        %span.limitsectionheading Last Limit :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= history.previous_limit rescue nil
+        %span.limitsectionheading= history.action.capitalize rescue nil
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= "(#{history.amount})" rescue nil
+        %span.limitsectionheading New Limit :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= history.current_limit rescue nil
+        %span.limitsectionheading Note :
+        = succeed "\u{a0}\u{a0}\u{a0}\u{a0}" do
+          %span.limitContent= history.note rescue '-'
+      .tools
+        %a.btn.btn-minier.btn-info{"data-target" => "#exampleModal", "data-toggle" => "modal", "data-whatever" => "@mdo", :href => "#"}
+          %i.icon-only.ace-icon.fa.fa-share

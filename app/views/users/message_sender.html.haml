@@ -1,0 +1,21 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header
+        %h1 Message Notification
+        .row
+          .col-xs-12
+            .row
+              .col-xs-12
+                .row.mt22
+                  = form_tag(admin_message_sender_path, :method=>'post',:html => {:class => "form-horizontal", :role => "form"}) do
+                    .col-sm-11
+                      .col-sm-12
+                        .col-sm-2   
+                          .div       
+                            %label MESSAGE:
+                          .div
+                            = text_area_tag :message,'', class: 'form-control',cols: "300", rows: "10"
+                    .col-xs-12
+                      .div.pt12
+                        = submit_tag "GO", value: 'SEND', :class =>"btn btn-info"

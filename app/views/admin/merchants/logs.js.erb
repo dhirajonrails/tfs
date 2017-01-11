@@ -1,0 +1,8 @@
+element = "<%=j render(partial: 'admin/merchants/log', locals: {limit_history: @merchant_limit_history}, format: 'html') %>"
+$(element).insertAfter($('.merchantLimitHistory').last())
+
+<% if @merchant_limit_history.current_page == @merchant_limit_history.total_pages %>
+  $('#view-more-merchant-log').remove();
+<% else %>
+  $('#view-more-merchant-log a').attr('href', '<%= url_for(page: @merchant_limit_history.current_page + 1) %>');
+<% end %>

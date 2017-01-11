@@ -1,0 +1,88 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 MERCHANT LIMIT REQUESTS
+        .row
+          .col-sm-12
+            = form_tag '/admin/request_limits/merchant/search', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchAdminTransactionForm'} do |f|
+              .col-sm-12
+                .row.mt22
+                  .col-sm-2
+                    .col-sm-5.pt7
+                      %lable
+                        Search
+                    .col-sm-7
+                      = text_field_tag :search,params[:search], class: 'form-control searchTrans', :id => "merchant_id"
+                  .col-sm-3
+                    .col-sm-6.pt7
+                      %lable
+                        RequestType
+                    .col-sm-6
+                    = select_tag :request, options_for_select(['Quick', 'Normal']), :selected => params[:request], include_blank: true  
+                  .col-sm-4                                   
+                    .col-sm-2.pt7
+                      %lable
+                        Status
+                    .col-sm-4
+                      = select_tag :status, options_for_select(RequestLimit::STATUS.collect{ |k, v| [v, k] }), :selected => params[:status], include_blank: true                    
+                    .col-sm-4
+                      = submit_tag "GO", value: 'search', :class =>"btn btn-info"                    
+            .row
+              .col-xs-12
+              - if @request_limits.present?
+                = paginate @request_limits, :window => 5 unless @request_limits.empty?
+                %table.tablesample-table-2.table.table-striped.table-bordered.table-hover
+                  %thead
+                    %tr
+                      %th 
+                      %th Distributor
+                      %th MerchantID
+                      %th MerchantName
+                      %th RequestDate
+                      %th TrackingID
+                      %th BankName
+                      %th RequestLimit
+                      %th RequestStatus
+                      %th StatusDate
+                      %th RequestType
+                      %th REMARK
+                  %tbody
+                    - @request_limits.each do |request_limit|
+                      - merchant = Merchant.find(request_limit.requestable_id)
+                      - distributor = Distributor.find_by_mobile(request_limit.distributor_mobile)
+                      %tr
+                        %td
+                          .hidden-sm.hidden-xs.action-buttons
+                            - if request_limit.status == 'On Hold'
+                              %a.green{href: edit_admin_request_limits_merchant_path(request_limit)}
+                                %i.ace-icon.fa.fa-pencil.bigger-130
+                            %a.red.delete{href: admin_request_limits_merchant_path(request_limit), 'data-method': :delete, confirm: 'Are you sure?' }
+                              %i.ace-icon.fa.fa-trash-o.bigger-130
+                        %td
+                          = distributor_detail(distributor) rescue nil
+                        %td
+                          = merchant.user.mobile rescue nil
+                        %td 
+                          = fullname(merchant.try(:profile).try(:first_name),merchant.try(:profile).try(:last_name))   rescue nil
+                        %td
+                          = format_date(request_limit.created_at) rescue nil
+                        %td
+                          = request_limit.tracking_id rescue nil
+                        %td
+                          = request_limit.try(:bank) rescue nil
+                        %td
+                          = request_limit.try(:amount) rescue nil
+                        %td
+                          = request_limit.try(:status) rescue nil
+                        %td
+                          = status_date(request_limit.created_at, request_limit.updated_at) rescue nil
+                        %td
+                          = quick_check(request_limit) rescue nil
+                        %td
+                          = request_limit.remark  
+                = paginate @request_limits, :window => 5 unless @request_limits.empty?
+              - else
+                %h4.mt30 THERE ARE NO PENDING MERCHANT REQUEST LIMITS
+      .rclear
+

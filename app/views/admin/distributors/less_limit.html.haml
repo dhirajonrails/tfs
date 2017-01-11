@@ -1,0 +1,37 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 LESS DISTRIBUTOR LIMIT
+      .row
+        .col-xs-12
+          = form_for(:change_limit, :url => "/admin/distributors/create_less_limit",:html => {:class => "form-horizontal", :role => "form", id: 'distribuorLessLimitForm'}, method: 'post') do |f|
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "search_distributor" }   Distributor ID :
+              .col-sm-5
+                %input#search_distributor.col-xs-12.col-sm-12{name: 'mobile','maxlength'=>10, type: 'text', :placeholder => ("Distributor ID")}
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "distributor_name"}  Name :
+              .col-sm-5
+                %input.col-xs-12.col-sm-12{id: "distributor_name", placeholder: "Distributor Name", type: "text", :readonly => ''}
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "change_note"}  Note :
+              .col-sm-5
+                = f.text_area :note, :class => 'form-control', :id => 'change_note', :placeholder => ("Default Text")  
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{ for: "change_amount"}  Less Limit :
+              .col-sm-5
+                = f.text_field :amount, :class => 'col-xs-12 col-sm-12', :id => 'change_amount', :placeholder => ("Enter the amount to Less")
+            .form-group
+              .clearfix.form-actions
+                .col-md-offset-3.col-md-9
+                  = f.submit "Less Limit",value: 'Less Limit', :class =>"btn btn-info submitbtn" do
+                    %i.ace-icon.fa.fa-check.bigger-110
+                      Less LIMIT
+
+  :javascript
+    $(document).ready(function(){
+      validation = new Validation('Forms')
+      validation.validate_limit('#distribuorLessLimitForm')
+    })                      
+  = javascript_include_tag 'admin/change_limit.js'

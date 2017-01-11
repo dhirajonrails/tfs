@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<ss:Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="xl1">
+    <Font ss:FontName='Calibri' ss:Size='11'/>
+      <Alignment ss:Horizontal='Center' ss:Vertical='Center'/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+    </ss:Style>
+    <ss:Style ss:ID="xl2">
+    <Font ss:FontName='Calibri' ss:Size='11' ss:Bold='1'/>
+      <Alignment ss:Horizontal='Center' ss:Vertical='Center'/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+    </ss:Style>
+
+  </ss:Styles>
+
+  <ss:Worksheet ss:Name="Sheet1">
+    <ss:Table>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='100'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='80'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='120'/>
+      <ss:Column ss:AutoFitWidth="1"  ss:Width='180'/>
+      <ss:Column ss:AutoFitWidth="1"  ss:Width='180'/>
+      <ss:Column ss:AutoFitWidth="1"/>
+      <ss:Column ss:AutoFitWidth="1"/>
+      <ss:Column ss:AutoFitWidth="1"  ss:Width='150'/>
+      <ss:Column ss:AutoFitWidth="1"  ss:Width='180'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='150'/>
+      <ss:Column ss:AutoFitWidth="1" ss:Width='80'/>      
+      <ss:Row ss:StyleID='xl2'>
+        <ss:Cell><ss:Data ss:Type="String">NEFT</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">AMOUNT</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">DATE</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">BEN NAME</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">A/C NO</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">BLANK</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">BLANK</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">SENDER A/C NO</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">REMARK</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">IFSC CODE</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String">A/C TYPE</ss:Data></ss:Cell>
+      </ss:Row>
+    <% @results.each do |product| %>
+      <ss:Row ss:StyleID='xl1'>
+        <ss:Cell><ss:Data ss:Type="String">N</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="Number"><%= product.amount rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.created_at.strftime("%d-%m-%y") rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.beneficiary.name rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.beneficiary_account_number rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String" x:Ticked='1'>915020047894209</ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.admin_remark rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="String"><%= product.beneficiary.ifsc_code rescue nil%></ss:Data></ss:Cell>
+        <ss:Cell><ss:Data ss:Type="Number">11</ss:Data></ss:Cell>
+      </ss:Row>
+    <% end %>
+    </ss:Table>
+  </ss:Worksheet>
+</ss:Workbook>
+

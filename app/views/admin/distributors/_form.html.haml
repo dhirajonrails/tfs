@@ -1,0 +1,87 @@
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Email :
+  .col-sm-5
+    .input-group
+      %span.input-group-addon
+      = user.email_field :email, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Email"              
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Mobile No :
+  .col-sm-5
+    .input-group
+      %span.input-group-addon
+        %i.ace-icon.fa.fa-phone
+      = user.text_field :mobile, :class => "col-xs-12 col-sm-12",'maxlength' => 10, :id => "form-field-mask-2",:placeholder=>"Mobile", type: "text"         
+= user.fields_for :distributor, @distributor do |pro|
+  = pro.fields_for :profile, @profile do |pro|
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} First Name :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :first_name, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"First Name", type: "text"         
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Last Name :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :last_name, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Last Name", type: "text"         
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Name Of Business :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :name_of_business, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Name Of Business", type: "text"
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} DOB :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :dob, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Date Of Birth", type: "text"         
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Address 1 :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :address1, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Adress 1", type: "text"         
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Address 2 :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :address2, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Address 2", type: "text"         
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} State :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :state, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"State", type: "text"
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} City :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :city, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"City", type: "text"         
+
+          
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Pin No. :
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :pincode, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Pin No", type: "text"         
+
+          
+
+
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Reference Name:
+      .col-sm-5
+        .input-group
+          %span.input-group-addon
+          = pro.text_field :reference_name, :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2",:placeholder=>"Reference Name", type: "text" 
+
+    .form-group
+      %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Status:
+      .col-sm-5
+        .input-group
+          = user.select :status, options_for_select(['active', 'inactive'],selected: user.object.status), :class => "col-xs-12 col-sm-12", :id => "form-field-mask-2"

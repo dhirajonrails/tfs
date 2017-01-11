@@ -1,0 +1,83 @@
+/*Margin top css*/
+.mt15{margin-top: 15px;}
+.mt20{margin-top: 20px;}
+.mt22{margin-top: 22px;}
+.mt60{margin-top: 60px;}
+.mt30{margin-top: 30px;}
+.mt40{margin-top: 40px;}
+.mt50{margin-top: 50px;}
+.mt20{margin-top: 20px;}
+.mmt140{margin-top: -140px;}
+
+.pt7{padding-top: 7px;}
+
+.rclear{
+  clear: both;
+}
+
+#sidebar.sidebar.responsive{
+    background-color: #F2F2F2;
+    border-style: solid;
+    border-color: #CCC;
+    border-width: 0px 1px 0px 0px;
+}
+.nav > li > a{
+	padding: 10px 8px !important;
+}
+.main-content .rcorners1{
+	border-radius: 5px;
+    background: #F2F2F2;
+    padding: 20px;
+    width: 100%;
+    height: 60px;
+    text-transform: capitalize;
+}
+.page-header{
+	margin: 9px 0px 20px !important;
+}
+
+.main-content .submitbtn {
+   background-color: #4CAF50 !important;height: 45px !important;border-radius: 0px !important;
+}
+.main-content .submitbtn:hover{
+  background-color: #4CAF50 !important;
+}
+.main-content .resetbtn {
+   background-color: #F44336 !important;height: 45px !important;border-radius: 0px !important;
+}
+.main-content .resetbtn:hover{
+  background-color: #F44336 !important;
+}
+.alertinfosucessmsg{
+	width: 82%;
+	margin-left: 17% !important;
+  margin-top: 20px;
+}
+.alertmsgtextalign{
+ font-size: 20px !important;
+ text-transform: capitalize !important;
+}
+.main-content.widthalign{
+	width: 83%;
+	margin-left: 17% !important;
+}
+
+.downlodexcelFile .btn-group > .btn > .caret {
+    margin-top: 0px !important;
+}
+
+.downlodexcelFile .btn-group > .btn > .caret {
+    margin-top: 0px !important;
+}
+/*table striped*/
+.table.table-bordered.table-striped.table-hover.content{display: block;height: 500px;overflow-y: scroll;}
+#searchSender.hearchheaderminus{margin-top: -133px !important;}
+
+.pt16{padding-top: 16px;}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background: #F08080;
+}

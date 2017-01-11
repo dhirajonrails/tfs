@@ -1,0 +1,88 @@
+#sidebar.sidebar.responsive
+  :javascript
+    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+    $(document).ready(function(){
+    })
+
+  %ul.nav.nav-list
+    / %li 
+    /   %a{ "href"=>"index.html" }
+    /     %i.menu-icon.fa.fa-tachometer
+    /     %span.menu-text Dashboard
+    /   %b.arrow
+    %li
+      %a{ "href"=> distributors_senders_path } 
+        %i.menu-icon.fa.fa-file-o
+        %span.menu-text VIEW REQUEST
+        %span.badge.badge-primary#distributorViewRequestBadge
+      %b.arrow
+    %li
+      %a.dropdown-toggle{"href"=>""}
+        %i.menu-icon.fa.fa-desktop
+        %span.menu-text MERCHANT
+        %b.arrow.fa.fa-angle-down
+      %b.arrow
+      %ul.submenu
+        %li
+          %a{" href"=>"/distributors/merchants/new"}
+            %i.menu-icon.fa.fa-caret-right
+            | Add Merchant
+          %b.arrow
+        %li
+          %a{" href"=>"#{distributors_merchants_path}"}
+            %i.menu-icon.fa.fa-caret-right
+            | View Merchant
+          %b.arrow
+        %li
+          %a{" href"=>"/distributors/merchants/add_limit"}
+            %i.menu-icon.fa.fa-caret-right
+            | Add Limit
+          %b.arrow
+        / %li
+        /   %a{" href"=>"/distributors/merchants/less_limit"}
+        /     %i.menu-icon.fa.fa-caret-right
+        /     | Less Limit
+        /   %b.arrow
+        %li
+          %a{" href"=>"/distributors/merchants/view_limit"}
+            %i.menu-icon.fa.fa-caret-right
+            | View Limit
+          %b.arrow
+        %li
+          %a{" href"=>"/distributors/merchants/limit_history"}
+            %i.menu-icon.fa.fa-caret-right
+            | Limit History
+          %b.arrow
+    %li
+      %a{ href: new_distributors_request_limit_path}
+        %i.menu-icon.fa.fa-list
+        %span.menu-text LIMIT REQUEST
+      %b.arrow
+
+    %li
+      %a{ href: distributors_request_limits_path }
+        %i.menu-icon.fa.fa-pencil-square-o
+        %span.menu-text VIEW LIMIT REQUEST
+      %b.arrow
+    %li
+      %a{ href: limit_history_distributors_path }
+        %i.menu-icon.fa.fa-list
+        %span.menu-text LIMIT HISTORY
+      %b.arrow
+    %li
+      %a{ href: merchant_requests_distributors_request_limits_path }
+        %i.menu-icon.fa.fa-list
+        %span.menu-text MER LIMIT REQUEST
+        %span.badge.badge-primary#dis_mer_limit_request_badge
+      %b.arrow      
+    %li
+      %a{"href"=>"/change_password"}
+        %%i.menu-icon.fa.fa-pencil-square-o
+        %span.menu-text CHANGE PASSWORD
+      %b.arrow
+  #sidebar-collapse.sidebar-toggle.sidebar-collapse
+    %i.ace-icon.fa.fa-angle-double-left{"data-icon1"=>("ace-icon fa fa-angle-double-left"),"data-icon2"=>("ace-icon fa fa-angle-double-right") }
+
+  
+  :javascript
+    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}

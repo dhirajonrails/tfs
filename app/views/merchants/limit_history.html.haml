@@ -1,0 +1,63 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1
+          Merchant LIMIT HISTORY
+      .row
+        .col-xs-12
+        .row
+          = form_tag '/merchants/search_limit_history', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchAdminTransactionForm'} do |f|
+            %a.btn.btn-info{ :href => '/merchants/download_limit_history?format=xls' } DOWNLOAD
+            .col-sm-6
+              .row
+                .col-sm-1
+                  %lable
+                    RequestType
+                .col-sm-2
+                  = select_tag :request, options_for_select(ChangeLimit::TYPE.collect{ |k, v| [v, k] }), :selected => params[:request], include_blank: true                    
+                .col-sm-1
+                  %lable
+                    Status
+                .col-sm-2
+                  = select_tag :status, options_for_select(ChangeLimit::STATUS.collect{ |k, v| [v, k] }), :selected => params[:status], include_blank: true
+                .col-sm-2
+                  = submit_tag "GO", value: 'search', :class =>"btn btn-info"            
+            .col-xs-12
+              %div
+                - if @limit_history.present?
+                  = paginate @limit_history, :window => 5              
+                  %table#sample-table-2.table.table-striped.table-bordered.table-hover
+                    %thead
+                      %tr
+                        %th Creation Date
+                        %th Note
+                        %th Status
+                        %th Last Limit
+                        %th Add Limit
+                        %th Less Limit
+                        %th New Limit
+                        %th Quick
+
+                    %tbody
+                      - @limit_history.each do |history| 
+                        %tr
+                          %td
+                            = format_date(history.created_at) rescue nil
+                          %td
+                            = history.note
+                          %td
+                            = history.status
+                          %td 
+                            = history.previous_limit rescue nil
+                          %td 
+                            = add_limit(history.action, history.amount) rescue nil
+                          %td 
+                            = less_limit(history.action, history.amount) rescue nil
+                          %td 
+                            = history.current_limit rescue nil
+                          %td 
+                            = quick_check(history)
+                  = paginate @limit_history, :window => 5
+                -else   
+                  NO DATA FOUND                                  

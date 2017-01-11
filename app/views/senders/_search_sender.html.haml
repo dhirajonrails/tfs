@@ -1,0 +1,14 @@
+#search_by_mobile_no.form-group
+  %label.col-sm-2.control-label.no-padding-right{:for => "form-field-1"} Search by Mobile no
+  .col-sm-4
+    .input-group
+      %input#searchByMobile.col-xs-12.col-sm-12.form-control{:name => "fname",'maxlength'=>10, :style => "padding: 2px 2px 3px !important;", :type => "text"}
+        %span.input-group-btn
+          %button#searchMobileBtn.btn.btn-default{ :style => "height:35px !important; width:72px !important;", :type => "button"} Check
+#search_by_acc_no.form-group
+  %label.col-sm-2.control-label.no-padding-right{:for => "form-field-1"} Search by A/C no
+  .col-sm-4
+    .input-group
+      %input#searchByAccount.col-xs-12.col-sm-12.form-control{:name => "fname", :type => "text", :value => ""}
+        %span.input-group-btn
+          %button#searchByAccountBtn.btn.btn-default{ :style => "height:35px !important; width:72px !important;", :type => "button"} Check

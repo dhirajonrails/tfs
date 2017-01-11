@@ -1,0 +1,15 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 EDIT DISTRIBUTOR
+      .row
+        .col-xs-12
+          = form_for(@user, url: admin_distributor_path(@user), :html => {:class => "form-horizontal", :role => "form"}, method: 'put') do |user|
+            = render "form", user: user
+            .clearfix.form-actions
+              .col-md-offset-3.col-md-9
+                %input.btn.btn-info.submitbtn{name: "saveForm", type: "submit", value: "Update Distributor"}
+                &nbsp; &nbsp; &nbsp;
+                %input.btn.btn-info.resetbtn{name: "Reset", type: "reset", value: "Reset"}
+     

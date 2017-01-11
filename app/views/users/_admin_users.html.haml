@@ -1,0 +1,44 @@
+.row
+  = render partial: 'layouts/permission_popup'
+  = render partial: 'layouts/admin_user_popup'
+  = render partial: 'layouts/admin_limit_popup'
+.col-sm-5
+  .widget-box.transparent
+    .widget-header.widget-header-flat
+      %h4.widget-title.lighter
+        %i.ace-icon.fa.fa-star.orange
+        Admin User
+        %span
+          %a.addAdminButton{"data-target" => "#addAdminModal", "data-toggle" => "modal", :href => "#"}
+            %i.fa.fa-plus.green{"aria-hidden" => "true"}
+      .widget-toolbar
+        %a{"data-action" => "collapse", :href => "#"}
+          %i.ace-icon.fa.fa-chevron-up
+    .widget-body
+      .widget-main.no-padding
+        %table.table.table-bordered.table-striped
+          %thead.thin-border-bottom
+            %tr
+              %th
+                %i.ace-icon.fa.fa-caret-right.blue>
+                name
+              %th
+                %i.ace-icon.fa.fa-caret-right.blue>
+                Mobile No
+              %th.hidden-480
+                %i.ace-icon.fa.fa-caret-right.blue>
+                Permission
+          %tbody#adminUsersTbody
+            - User.with_role('admin').each do |user|
+              %tr
+                %td= "#{user.admin.profile.first_name} #{user.admin.profile.last_name}" rescue nil
+                %td
+                  %b.green= user.mobile rescue nil
+                %td.hidden-480
+                  %a.permitButton{"data-target" => "#permissionModal", "data-toggle" => "modal", "data-user-id" => user.id, :href => "#"}
+                    %span.label.label-info.arrowed-right.arrowed-in Permission
+                %td
+                  %span.adminLimitButton{"data-target" => "#adminLimitModal", "data-toggle" => "modal", "data-user-id" => user.id, :href => "#"}
+                    %i.icon-only.ace-icon.fa.fa-share
+
+= javascript_include_tag 'admin/change_permission.js'

@@ -1,0 +1,40 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1
+          View distributor limit
+          %small
+      .row
+        .col-xs-12
+          .row
+            = form_tag '/admin/distributors/search_limit', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchDistributorForm'} do |f|
+              %a.btn.btn-info{ :href => '/admin/distributors/download_view_limit?format=xls' } DOWNLOAD
+              .col-sm-6
+                .col-sm-2
+                  %lable
+                    Search      
+                .col-sm-3  
+                  = text_field_tag :search, params[:search], class: 'form-control', :id => "distributor_id"
+                .col-sm-4
+                  = submit_tag "GO", value: 'search', :class =>"btn btn-info"          
+            .col-xs-12
+              %div
+                - if @distributors.present?
+                  = paginate @distributors, :window => 5
+                  %table#sample-table-2.table.table-striped.table-bordered.table-hover
+                    %thead
+                      %tr
+                        %th Distributor Id
+                        %th Distributor Name
+                        %th Balance
+                    %tbody
+                      - @distributors.each do |distributor|  
+                        %tr 
+                          %td 
+                            = distributor.user.mobile rescue nil
+                          %td
+                            = fullname(distributor.try(:profile).try(:first_name), distributor.try(:profile).try(:last_name))  rescue nil
+                          %td
+                            = distributor.balance_limit  rescue nil
+                  = paginate @distributors, :window => 5

@@ -1,0 +1,26 @@
+<table id="users-table" data-source="<%= data_index_admin_senders_path(format: :json) %>">
+  <thead>
+    <tr>
+      <th>Txn ID</th>
+      <th>Amount</th>
+      <th>Beneficiary name</th>
+      <th>Distributor name</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+	jQuery(document).ready(function() {
+	  $('#users-table').dataTable({
+	    "processing": true,
+	    "serverSide": true,
+	    "ajax": $('#users-table').data('source'),
+	    "pagingType": "full_numbers",
+	    // optional, if you want full pagination controls.
+	    // Check dataTables documentation to learn more about
+	    // available options.
+	  });
+	});
+</script>	

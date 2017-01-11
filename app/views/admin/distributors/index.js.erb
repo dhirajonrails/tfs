@@ -1,0 +1,8 @@
+element = "<%=j render(partial: 'admin/distributors/distributor', locals: {distributors: @distributors}, format: 'html') %>"
+$(element).insertAfter($('.distributorList').last())
+
+<% if @distributors.current_page == @distributors.total_pages %>
+  $('#view-more-distributor').remove();
+<% else %>
+  $('#view-more-distributor a').attr('href', '<%= url_for(page: @distributors.current_page + 1) %>');
+<% end %>

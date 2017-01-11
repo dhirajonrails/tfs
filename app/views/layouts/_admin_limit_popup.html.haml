@@ -1,0 +1,25 @@
+#adminLimitModal.modal.fade.right{"aria-labelledby" => "adminLimitLabel", :role => "dialog", :tabindex => "-1", 'data-user-id' => ''}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#adminLimitLabel.modal-title 
+          Admin Limit For
+          %span.red#adminNameLimit
+      %form#addAdminLimitForm
+        .modal-body
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Current Limit :
+            .input-group
+              %input#currentAdminLimit.form-control.adminLimit{:type => "text", :disabled => "disabled"}/
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "adminLimitAmount"} Add Limit:
+            .input-group
+              %input#adminLimitAmount.form-control.adminLimit{:type => "text", required: 'required'}/
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "newAdminLimit"} New Limit :
+            .input-group
+              %input#newAdminLimit.form-control.adminLimit{:type => "text", :disabled => "disabled"}/
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} CLOSE
+          %input.btn.btn-primary#addAdminLimitSubmit{:type => "submit", value: 'ADD'}

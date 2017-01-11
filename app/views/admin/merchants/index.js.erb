@@ -1,0 +1,8 @@
+element = "<%=j render(partial: 'admin/merchants/merchant', locals: {merchants: @merchants}, format: 'html') %>"
+$(element).insertAfter($('.merchantList').last())
+
+<% if @merchants.current_page == @merchants.total_pages %>
+  $('#view-more-merchant').remove();
+<% else %>
+  $('#view-more-merchant a').attr('href', '<%= url_for(page: @merchants.current_page + 1) %>');
+<% end %>

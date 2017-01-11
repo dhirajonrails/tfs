@@ -1,0 +1,74 @@
+.invoice-box
+  %table{:cellpadding => "0", :cellspacing => "0"}
+    %tr
+      %td
+        %h1{:style => "font-size: 14px;color: #28a567;top: 0px;"} TRAVERSE EKO LIFE FOUNDATION
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.textheading Transaction Id :
+        %span= @transaction.txt_id rescue nil
+        %br/
+        %span.textheading Transaction Date :
+        %span
+          = format_date(@transaction.created_at) rescue nil 
+    %tr.heading
+      %td
+        Transaction Information
+      %td
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Merchant ID :
+        %span.spanSecondDetail= @transaction.merchant_mobile rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Sender Mobile No :
+        %span.spanSecondDetail= @transaction.sender_mobile rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Sender Name :
+        %span.spanSecondDetail= @transaction.sender.name rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Beneficiary Name :
+        %span.spanSecondDetail= @transaction.beneficiary.name
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Sendar City :
+        %span.spanSecondDetail= @transaction.sender.address rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Beneficiary state :
+        %span.spanSecondDetail= @transaction.beneficiary.bank_detail.state rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail IFSC CODE :
+        %span.spanSecondDetail= @transaction.beneficiary.ifsc_code rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Beneficiary City :
+        %span.spanSecondDetail= @transaction.beneficiary.bank_detail.city rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Bank Name :
+        %span.spanSecondDetail= @transaction.beneficiary.bank_detail.name rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Bank District :
+        %span.spanSecondDetail= @transaction.beneficiary.bank_detail.city rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Account No :
+        %span.spanSecondDetail= @transaction.beneficiary.account_number rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Branch Name :
+        %span.spanSecondDetail= @transaction.beneficiary.bank_detail.branch rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %span.midDetail Amount Transfer :
+        %span.spanSecondDetail= @transaction.amount rescue nil
+    %tr
+      %td{:style => "width:100% !important;"}
+        %br
+        %span.midDetail Authorized Signatory
+        %span.spanSecondDetail 

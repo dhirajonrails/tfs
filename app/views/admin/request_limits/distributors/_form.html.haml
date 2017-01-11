@@ -1,0 +1,35 @@
+= form_for(@request_limit, :url => admin_request_limits_distributor_path(@request_limit),:html => {:class => "form-horizontal", :role => "form"}) do |f|
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Distributor ID :
+    .col-sm-5
+      = text_field_tag :distributor_id, @distributor.user.mobile,'maxlength'=>10, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', disabled: true
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Name :
+    .col-sm-5
+      = text_field_tag :name, fullname(@distributor.profile.first_name, @distributor.profile.last_name), :class => 'col-xs-12 col-sm-12', :id => 'form-input-readonly', disabled: true
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Deposited in Bank :
+    .col-sm-5
+      = f.text_field :bank, :class => 'form-control', :id => 'form-field-8', :placeholder => ("Bank Name"), disabled: true
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Required Limit :
+    .col-sm-5
+      = f.text_field :amount, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("Required Limit"), disabled: true
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  DP Tracking ID :
+    .col-sm-5
+      = f.text_field :tracking_id, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("DP Tracking ID"), disabled: true          
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  STATUS :
+    .col-sm-5
+      = f.select :status, RequestLimit::STATUS.collect{ |k, v| [v, k] }, title: "Select Status"
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" } REMARK :
+    .col-sm-5
+      = f.text_field :remark, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("Enter your remarks for this limit request")
+  .form-group
+    .clearfix.form-actions
+      .col-md-offset-3.col-md-9
+        = f.submit "UPDATE LIMIT", :class =>"btn btn-info" do
+          %i.ace-icon.fa.fa-check.bigger-110
+            UPDATE LIMIT

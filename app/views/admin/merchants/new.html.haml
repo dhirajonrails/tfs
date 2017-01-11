@@ -1,0 +1,19 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 Add Merchant
+      .row
+        .col-xs-12
+          = form_for(@user, url: admin_merchants_path, :html => {:class => "form-horizontal", :role => "form"}, method: 'post') do |user|
+            = render "form", user: user
+            .clearfix.form-actions
+              .col-md-offset-3.col-md-9
+                %input.btn.btn-info.submitbtn{name: "saveForm", type: "submit", value: "Create Merchant"}
+                &nbsp; &nbsp; &nbsp;
+                %input.btn.btn-info.resetbtn{name: "Reset", type: "reset", value: "Reset"}
+
+  :javascript
+    $(document).ready(function(){
+      $("input").attr("required", true);
+    })                                    

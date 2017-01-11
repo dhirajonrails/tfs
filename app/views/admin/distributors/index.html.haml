@@ -1,0 +1,70 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 View all distributors
+        .row.mt60
+          .col-xs-12
+            .row
+              = form_tag '/admin/distributors/search_distributor', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchDistributorForm'} do |f|
+                .col-sm-6
+                  .col-sm-3
+                    %lable
+                      Distributor_Id                          
+                  .col-sm-3
+                    = text_field_tag :search, params[:search], class: 'form-control', :id => "distributor_id"
+                  .col-sm-4
+                    = submit_tag "GO", value: 'search', :class =>"btn btn-info"
+              .col-xs-12
+                %div
+                - if @distributors.present?
+                  = paginate @distributors, :window => 5 unless @distributors.empty?
+                  %table.table.table-bordered.table-striped.table-hover.content
+                    %thead
+                      %tr
+                        %th Action
+                        %th Status
+                        %th Distributor Id
+                        %th Distributor Name
+                        %th Name Of Business
+                        %th Date Of Birth
+                        %th Address 
+                        %th Email-id
+                        %th Mobile No
+                        %th Reference Name
+                        %th Created Date
+                    %tbody
+                      - @distributors.each do |distributor|
+                        %tr
+                          %td
+                            .hidden-sm.hidden-xs.action-buttons
+                              %a.green{href: edit_admin_distributor_path(distributor)}
+                                %i.ace-icon.fa.fa-pencil.bigger-130
+                              %a.red{href: "#"}
+                                %i.ace-icon.fa.fa-trash-o.bigger-130
+                          %td.hidden-480
+                            - if distributor.user.status == 'active'
+                              %span.label.label-sm.label-warning Active
+                            - else
+                              %span.label.label-sm.label-warning Inactive
+                          %td
+                            = distributor.user.try(:mobile) rescue nil
+                          %td
+                            = fullname(distributor.profile.try(:first_name),distributor.profile.try(:last_name)) rescue nil
+                          %td
+                            = distributor.profile.try(:name_of_business)  rescue nil
+                          %td
+                            = distributor.profile.try(:dob) rescue nil
+                          %td
+                            = distributor.profile.try(:address1) rescue nil
+                          %td
+                            = distributor.user.try(:email) rescue nil
+                          %td
+                            = distributor.user.try(:mobile) rescue nil
+                          %td
+                            = distributor.profile.try(:reference_name) rescue nil
+                          %td
+                            = format_date(distributor.created_at)  rescue nil
+                  = paginate @distributors, :window => 5 unless @distributors.empty?
+                - else
+                  %h4 No Distributor Present

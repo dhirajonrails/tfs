@@ -1,0 +1,25 @@
+.col-sm-6
+  .widget-box
+    .widget-header
+      .col-sm-12
+        .col-sm-6.pt5
+          %span.fs18 Total Distributor:
+          %span.fs18= "##{Distributor.count}"
+        .col-sm-6.pt5
+          %span.fs18 Active Distributor :
+          %span.fs18= "#{User.with_role(:distributor).where(status: 'active').count}"
+    .widget-body
+      .widget-main.no-padding
+        .dialogs#distributorList
+          = render partial: 'admin/distributors/distributor', locals: { distributors: distributors }
+          - unless distributors.current_page == distributors.total_pages
+            %p#view-more-distributor
+              %a{href: 'javascript:void(0)'} view more
+        %form
+          .form-actions
+            .input-group
+              %input.form-control{:name => "message", :placeholder => "Type your message here ...", :type => "text"}/
+              %span.input-group-btn
+                %button.btn.btn-sm.btn-info.no-radius{:type => "button"}
+                  %i.ace-icon.fa.fa-share
+                  SEARCH

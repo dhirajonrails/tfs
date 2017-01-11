@@ -1,0 +1,49 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1
+          View Merchant Limit
+      .row
+        .col-xs-12
+          .row
+            = form_tag '/admin/merchants/search_limit', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchMerchantForm'} do |f|
+              %a.btn.btn-info{ :href => '/admin/merchants/download_view_limit?format=xls' } DOWNLOAD
+              .col-sm-6
+                .col-sm-2
+                  %lable
+                    Search                          
+                .col-sm-3  
+                  = text_field_tag :search, params[:search], class: 'form-control', :id => "merchant_id"
+                .col-sm-4
+                  = submit_tag "GO", value: 'search', :class =>"btn btn-info"                      
+            .col-xs-12
+              %div
+                - if @merchants.present?
+                  = paginate @merchants, :window => 5
+                  %table#sample-table-2.table.table-striped.table-bordered.table-hover
+                    %thead
+                      %tr
+                        %th Distributor
+                        %th Merchant Id
+                        %th Merchant Name
+                        %th Balance
+                        %th Quick Balance
+                    %tbody
+                      - @merchants.each do |merchant|  
+                        %tr 
+                          %td
+                            %span 
+                              = merchant.distributor.profile.first_name rescue nil
+                              %br
+                            %span
+                              = merchant.distributor.user.mobile rescue nil
+                          %td 
+                            = merchant.user.mobile rescue nil
+                          %td
+                            = fullname(merchant.try(:profile).try(:first_name), merchant.try(:profile).try(:last_name)) rescue nil
+                          %td
+                            = merchant.balance_limit rescue nil
+                          %td
+                            = merchant.quick_limit rescue nil  
+                  = paginate @merchants, :window => 5

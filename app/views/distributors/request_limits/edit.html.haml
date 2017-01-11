@@ -1,0 +1,62 @@
+.main-content.widthalign
+  #breadcrumbs.breadcrumbs
+    :javascript
+      try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+    %ul.breadcrumb
+      %li
+        %i.ace-icon.fa.fa-home.home-icon
+        %a{ "href": "#" } MERCHANT
+  .page-content
+    .page-content-area
+      .page-header
+        %h1
+          LIMIT REQUEST
+      .row
+        .col-xs-12
+          = form_for(@request_limit, :url => distributors_request_limit_path(@request_limit),:html => {:class => "form-horizontal", :role => "form"}) do |f|
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Merchant ID :
+              .col-sm-5
+                = text_field_tag :merchant_id, @merchant.user.mobile,'maxlength'=>10, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :readonly => ''
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Name :
+              .col-sm-5
+                = text_field_tag :name, fullname(@merchant.profile.first_name, @merchant.profile.last_name), :class => 'col-xs-12 col-sm-12', :id => 'form-input-readonly', disabled: true
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Deposited in Bank :
+              .col-sm-5
+                = f.text_field :bank, :class => 'form-control', :id => 'form-field-8', :placeholder => ("Bank Name"), disabled: true
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Required Limit :
+              .col-sm-5
+                = f.text_field :amount, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("Required Limit"), disabled: true
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  DP Tracking ID :
+              .col-sm-5
+                = f.text_field :tracking_id, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("DP Tracking ID"), disabled: true
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  STATUS :
+              .col-sm-5
+                = f.select :status, RequestLimit::STATUS.collect{ |k, v| [v, k] }, title: "Select Status"
+            .form-group
+              %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  REMARK :
+              .col-sm-5
+                = f.text_field :remark, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("Enter the for the limit request")
+            .form-group
+              .clearfix.form-actions
+                .col-md-offset-3.col-md-9
+                  = f.submit "UPDATE LIMIT", :class =>"btn btn-info" do
+                    %i.ace-icon.fa.fa-check.bigger-110
+                      UPDATE LIMIT
+
+                      = render 'form', f: f
+
+                      .form-group
+                        .clearfix.form-actions
+                          .col-md-offset-3.col-md-9
+                            = f.submit "UPDATE LIMIT", :class =>"btn btn-info" do
+                              %i.ace-icon.fa.fa-check.bigger-110
+                                UPDATE LIMIT 
+                            &nbsp; &nbsp; &nbsp;
+                            %input.btn.btn-info{name: "Reset", type: "reset", value: "Reset"}
+                              %i.ace-icon.fa.fa-undo.bigger-110                         

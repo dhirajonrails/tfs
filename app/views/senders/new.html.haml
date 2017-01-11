@@ -1,0 +1,39 @@
+.main-content.widthalign
+  #breadcrumbs.breadcrumbs
+    :javascript
+      try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+    %ul.breadcrumb
+      %li
+        %i.ace-icon.fa.fa-home.home-icon
+        %a{ "href": "#" } USER REGISTER
+  .page-content
+    .page-content-area
+      .page-header
+        .content
+          .row
+            .col-sm-12
+              .row
+                .col-sm-2
+                  .radio
+                    %label
+                      %input.ace#newRegister{value: 'new', :name => "sender_type", :type => "radio" }
+                        %span.lbl New
+                .col-sm-2
+                  .radio
+                    %label
+                      %input.ace#exisingRegister{value: 'exist', :checked => "checked", :name => "sender_type", :type => "radio"}
+                        %span.lbl Existing
+          #searchSender
+            = render partial: 'search_sender'                    
+
+        = render partial: 'form'          
+  
+  = javascript_include_tag 'sender.js'
+
+:javascript
+  $(document).ready(function(){
+    $("input.registerForm").attr("required", 'required');
+    sender = new window.SenderRegister();
+    sender.init();
+  })
+

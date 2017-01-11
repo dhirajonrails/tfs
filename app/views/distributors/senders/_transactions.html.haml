@@ -1,0 +1,63 @@
+%script#transactionTemplate{type: 'text/html'}
+  -if transactions.present?
+    = paginate transactions, :window => 5 unless transactions.empty?
+    %table.table.table-bordered.table-striped.table-hover.content
+      %thead
+        %tr
+          %th MERCHANT DETAILS
+          %th TXN ID
+          %th TXN DATE
+          %th SENDER
+          %th BENEFICIARY NAME
+          %th BANK DETAILS
+          %th BANK
+          %th ACCOUNT NUMBER
+          %th IFSC CODE
+          %th AMT TO TRANSFER
+          %th CHARGES
+          %th TOTAL
+          %th BALANCE
+          %th RequestType
+          %th STATUS
+          %th REMARK
+      %tbody
+        - transactions.each do |transaction|
+          - beneficiary = transaction.beneficiary rescue nil
+          - sender = transaction.sender rescue nil
+          - bank_detail = beneficiary.bank_detail rescue nil
+          %tr
+            %td
+              = merchant_details(transaction.merchant) rescue nil
+            %td
+              = transaction.txt_id rescue nil
+            %td
+              = format_date(transaction.created_at) rescue nil
+            %td
+              = sender_detail(sender) rescue nil
+            %td
+              = beneficiary.name rescue nil
+            %td
+              = bank_details(bank_detail) rescue nil
+            %td
+              = bank_detail.name rescue nil
+            %td
+              = beneficiary.account_number rescue nil
+            %td
+              = beneficiary.ifsc_code rescue nil
+            %td
+              = transaction.amount rescue nil
+            %td
+              = transaction.charges rescue nil
+            %td
+              = "#{transaction.amount + transaction.charges}" rescue nil
+            %td
+              = transaction.current_limit rescue nil
+            %td
+              = transaction_type(transaction.quick_transfer) rescue nil
+            %td
+              = transaction.status rescue nil
+            %td
+              = transaction.merchant_remark rescue nil  
+    = paginate transactions, :window => 5 unless transactions.empty?
+  - else
+    %h4 YOU HAVE NO SERVICE REQUEST

@@ -1,0 +1,73 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header
+        %h1 SERVICE HISTORY
+        .row
+          .col-xs-12
+            .row
+              .col-xs-12
+                .row
+                  .col-sm-3
+                    .row
+                      .col-sm-12
+                        %span Total Limit:
+                        = @total_limit rescue nil
+                    .row
+                      .col-sm-12
+                        %span Total Limit Used: 
+                        = @total_limit - @distributor.balance_limit rescue nil
+                    .row
+                      .col-sm-12
+                        %span Limit Left:
+                        = @distributor.balance_limit rescue nil
+
+                  = form_tag '/distributors/senders/search', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'disSearchTransactionForm'} do |f|
+                    .col-sm-6
+                      .row
+                        .col-sm-1
+                          %label Start Date:
+                        .col-sm-2
+                          = text_field_tag :start,params[:start], class: 'form-control date-picker', "data-date-format" => "dd-mm-yyyy", :id => "startDate"
+                        .col-sm-1
+                          %lable
+                            End Date:
+                        .col-sm-2
+                          = text_field_tag :end,params[:end], class: 'form-control date-picker', :id => "endDate"
+                        .col-sm-1
+                          %lable
+                            Mer_Id
+                        .col-sm-2  
+                          = text_field_tag :merchant_id,params[:merchant_id], class: 'form-control', :id => "merchant_id"
+                        .col-sm-1
+                          %label
+                            Txn ID:
+                        .col-sm-2
+                          = text_field_tag :txn_id,params[:txn_id], class: 'form-control searchTrans', id: "txn_id" 
+                        .col-sm-1
+                          %label
+                            STATUS:
+                        .col-sm-5
+                          = select_tag :status, options_for_select(Transaction::STATUS.collect{ |k, v| [v, k] }), :selected => params[:status], include_blank: true 
+                        .col-sm-1
+                          %lable
+                            TYPE:
+                        .col-sm-2
+                          = select_tag :request, options_for_select(ChangeLimit::TYPE.collect{ |k, v| [v, k] }), :selected => params[:request], include_blank: true                                                                                                                  
+                        .col-sm-2
+                          = submit_tag "GO", value: 'search', :class =>"btn btn-info"
+                        %div
+            %section.transactionContent{"data-transaction-list" => "#{@transactions.to_json()}"}
+            #transactionDetails
+              = render 'transactions', transactions: @transactions
+
+
+  = javascript_include_tag 'transactions.js'
+
+  :javascript
+    $(document).ready(function(){
+      sender = new window.TransactionDetails()
+      sender.init()
+      validation = new Validation('Forms')
+      validation.validate_search('#disSearchTransactionForm')
+    })

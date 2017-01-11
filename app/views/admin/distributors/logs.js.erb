@@ -1,0 +1,8 @@
+element = "<%=j render(partial: 'admin/distributors/log', locals: {limit_history: @distributor_limit_history}, format: 'html') %>"
+$(element).insertAfter($('.distributorLimitHistory').last())
+
+<% if @distributor_limit_history.current_page == @distributor_limit_history.total_pages %>
+  $('#view-more-distributor-log').remove();
+<% else %>
+  $('#view-more-distributor-log a').attr('href', '<%= url_for(page: @distributor_limit_history.current_page + 1) %>');
+<% end %>

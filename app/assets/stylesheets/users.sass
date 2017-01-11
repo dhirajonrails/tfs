@@ -1,0 +1,30 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+input[type="checkbox"]
+  filter: alpha(opacity=0)
+  display: inline-block
+  height: 23px
+  width: 23px
+  padding: 0
+  margin: 0
+
+.checkboxWrap
+  background: image-url("checkbox.png") left top no-repeat
+  height: 23px
+  width: 23px
+  display: inline-block
+
+.checkboxWrap.checked
+  background-position: left -60px
+
+.checkboxWrap.checked.disabled
+  background-position: left -90px
+
+.checkboxWrap.disabled
+  background-position: left -30px
+
+.checkboxWrap.partially
+  background-position: left -120px
+

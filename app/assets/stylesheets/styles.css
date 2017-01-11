@@ -1,0 +1,60 @@
+.homePagewrapper .infobox-small{width: 100%;height: 120px;}
+.homePagewrapper .infobox-small>.infobox-data{width:69%;max-width: 69%;padding-top: 15px;}
+.homePagewrapper .infobox-small>.infobox-chart{width: 30%;max-width: 30%;}
+.homePagewrapper .infobox .infobox-content{width:100%;max-width: 100%;font-size: 20px;padding-top: 14px;}
+.mt30{margin-top: 30px;}
+.homePagewrapper .infobox .infobox-content:first-child{font-weight: 700;font-size: 23px;}
+.homePagewrapper .infobox-chart .dashborIconalign{font-size: 53px;padding-top: 10px;}
+.homePagewrapper .infobox-chart.divSunsaxalign{width: 71px !important;height: 19px !important;}
+.homePagewrapper .infoxDivalign{width: 30%;}
+.homePagewrapper .infobox-chart.divSunsaxalign canvas{width: 66px !important;height: 56px !important;}
+.homePagewrapper .infobox-icon.infoxDivalign i{font-size: 76px;padding-left: 10px;}
+.homePagewrapper .infobox-data.adminCharge{margin-left: 7%;}
+.carolColor{background-color: #ff533d !important;}
+.cyanColor{background-color: #F9BE06 !important;}
+.iceColor{background-color: #0375B4 !important;}
+.silverColor{background-color: #C0C0C0 !important;}
+.lightGreencolor{background-color: #52BE80 !important;}
+.homePagewrapper .adminUser30{width: 30%;}
+.homePagewrapper .adminUser70{width: 59%;}
+.homePagewrapper .useradmindivColor i{font-size: 50px;padding-top: 42%;color: #fff;}
+.homePagewrapper .infobox .infobox-content{color: #fff;}
+.fs14{font-size: 14px;}
+.pt5{padding-top: 5px;}
+.fs18{font-size: 18px !important;}
+.mt60{margin-top: 60px;}
+.mt32{margin-top: 32px;}
+.mt50{margin-top: 50px;}
+.mt40{margin-top: 40px;}
+.fw500{font-weight :500};
+.w100{width: 100%;}
+.textWhite{color: #fff !important;}
+.widget-header .merchantHeader{font-size: 18px !important;font-weight: 600;}
+.pl10{padding-left: 10px;position: absolute;}
+.limitsectionheading{color: rgba(8, 85, 171, 0.74);font-weight: 600;font-size: 12px;}
+.limitContent{font-size: 12px;color: rgba(111, 86, 86, 0.76);font-weight: 600;}
+.dialogs{height: 400px;overflow-x: scroll;}
+.limit-history-add { background-color: #ccffcc; }
+.limit-history-less { background-color: #EECBCB; }
+.user-active { background-color: #ccffcc; }
+.user-inactive { background-color: #EECBCB; }
+.reject { background-color:#FF0000; }
+
+.modal.fade:not(.in).bottom .modal-dialog {
+    -webkit-transform: translate3d(0, 25%, 0);
+    transform: translate3d(0, 25%, 0);
+}
+
+.modal.fade:not(.in).right .modal-dialog {
+    -webkit-transform: translate3d(45%, 0, 0);
+    transform: translate3d(45%, 0, 0);
+}
+
+.adminLimitButton{
+	cursor: pointer;
+	cursor: hand;
+}
+
+.adminLimit {
+	text-align: center;
+}

@@ -1,0 +1,29 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header
+        %h1 NOTIFICATION
+        .row
+          .col-xs-12
+            .row
+              .col-xs-12
+                .row.mt22
+                  = form_tag(admin_notification_path, :method=>'post',:html => {:class => "form-horizontal", :role => "form"}) do
+                    .col-sm-11
+                      .col-sm-12
+                        .col-sm-2   
+                          .div       
+                            %label MESSAGE:
+                          .div
+                            = text_area_tag :message,'', class: 'form-control',cols: "100", rows: "10"
+                    .col-xs-12
+                      .div.pt12
+                        = submit_tag "GO", value: 'ADD', :class =>"btn btn-info"
+
+              .col-xs-12
+                .row.mt22
+                  = form_tag(admin_notification_path, :method=>'delete',:html => {:class => "form-horizontal", :role => "form"}) do
+                    .col-sm-12
+                      .div.pt16
+                        = submit_tag "GO", value: 'Delete', :class =>"btn btn-info"
+

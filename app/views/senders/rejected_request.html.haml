@@ -1,0 +1,141 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header
+        %h1 REJECTED REQUESTS
+        .row.mt22
+          .col-sm-9
+            .col-sm-12
+              %span#quick_total{:style => "color:red"}
+                %b Quick Total Bal:
+                %b
+                  = @quick_total rescue nil
+            .col-sm-12
+              %span#quick_used{:style => "color:red"}
+                %b Quick Used Bal:
+                %b
+                  = @quick_total - current_user.merchant.quick_limit rescue nil
+            .col-sm-12
+              %span#quick_remaining{:style => "color:red"}
+                %b Quick Remaining Bal: 
+                %b 
+                  = current_user.merchant.quick_limit rescue nil
+          .col-sm-3
+            .col-sm-12
+              %span#total_limit
+                %b Your Total Limit:
+                %b
+                  = @normal_total rescue nil
+            .col-sm-12
+              %span#used_limit
+                %b Used Limit:
+                %b
+                  = @normal_total - current_user.merchant.balance_limit rescue nil
+            .col-sm-12
+              %span#remaining_limit
+                %b Remaining Limit:
+                %b
+                  = current_user.merchant.balance_limit rescue nil
+          .col-sm-12.mt22
+          = form_tag '/senders/search', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchAdminTransactionForm'} do |f|
+            .col-sm-3
+              .col-sm-12
+                .col-sm-6
+                  %label Start Date:
+                .col-sm-6
+                  = text_field_tag :start,params[:start], class: 'form-control date-picker searchTrans', :id => "startDate"
+              .col-sm-12.mt15
+                .col-sm-6
+                  %label
+                    End Date:
+                .col-sm-6
+                  = text_field_tag :end,params[:end], class: 'form-control date-picker searchTrans', :id => "endDate"
+            .col-sm-3
+              .col-sm-12
+                .col-sm-6
+                  %label
+                    SEARCH:
+                .col-sm-6
+                  = text_field_tag :search,params[:search], class: 'form-control searchTrans', id: "txn_id"
+            = hidden_field_tag :status, 'rejected'
+            .col-sm-3
+              .col-sm-12
+                .col-sm-6
+                  %lable
+                    RequestType
+                .col-sm-6
+                  = select_tag :request, options_for_select(ChangeLimit::TYPE.collect{ |k, v| [v, k] }), :selected => params[:request], include_blank: true          
+            .col-sm-3
+              .col-sm-12
+                = submit_tag "GO", value: 'search', :class =>"btn btn-info"
+          .col-xs-12
+            .row.mt20
+              .col-xs-12
+                %div
+                - if @transactions.present?
+                  = paginate @transactions, :window => 5 unless @transactions.empty?
+                  %table.table.table-bordered.table-striped.table-hover.content
+                    %thead
+                      %tr
+                        %th print
+                        %th TXN ID
+                        %th TXN DATE
+                        %th SENDER
+                        %th BENEFICIARY NAME
+                        %th BANK DETAILS
+                        %th BANK
+                        %th ACCOUNT NUMBER
+                        %th IFSC CODE
+                        %th AMT TO TRANSFER
+                        %th CHARGES
+                        %th TOTAL
+                        %th BALANCE
+                        %th STATUS
+                        %th RequestType
+                        %th REMARK
+                    %tbody
+                      - @transactions.each do |transaction|
+                        %tr
+                          %td
+                            .hidden-sm.hidden-xs.action-buttons
+                              %a.green{ href: "#{download_invoice_sender_path(transaction)}.pdf", format: 'pdf', target: '_blank' }
+                                %i.ace-icon.fa.fa-print.bigger-130
+                          %td
+                            = transaction.txt_id rescue nil
+                          %td
+                            = format_date(transaction.created_at) rescue nil
+                          %td
+                            = sender_detail(transaction.sender) rescue nil
+                          %td
+                            = transaction.beneficiary.name rescue nil
+                          %td
+                            = bank_details(transaction.beneficiary.bank_detail) rescue nil
+                          %td
+                            = transaction.beneficiary.bank_detail.name rescue nil
+                          %td
+                            = transaction.beneficiary.account_number rescue nil
+                          %td
+                            = transaction.beneficiary.ifsc_code rescue nil
+                          %td
+                            = transaction.amount rescue nil
+                          %td
+                            = transaction.charges rescue nil
+                          %td
+                            = "#{transaction.amount+transaction.charges}" rescue nil
+                          %td
+                            = transaction.current_limit rescue nil
+                          %td
+                            = transaction.status rescue nil
+                          %td
+                            = quick_transfer(transaction)
+                          %td
+                            = transaction.merchant_remark rescue nil
+                  = paginate @transactions, :window => 5 unless @transactions.empty?
+                - else
+                  %h4 YOU HAVE NO SERVICE REQUEST FOR TODAY
+
+  :javascript
+    $(document).ready(function(){
+      validation = new Validation('Forms')
+      validation.validate_search('#searchTransactionForm')
+    })

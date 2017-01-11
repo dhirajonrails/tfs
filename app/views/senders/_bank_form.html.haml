@@ -1,0 +1,30 @@
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  IFSC Code :
+  .col-sm-5
+    = text_field_tag 'bank[ifsc_code]','', :class => 'form-control beneficiaryRegister registerForm', :id => 'ifscCode'
+    &nbsp; &nbsp; &nbsp;
+    %input.btn.btn-info{name: "searchBank", type: "button", value: "Search", :id=> 'check_bank'}
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Bank Name :
+  .col-sm-5
+    = text_field_tag 'bank[name]','', :class => 'form-control beneficiaryRegister registerForm', :id => 'bankName'
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  State :
+  .col-sm-5
+    = text_field_tag 'bank[state]','', :class => 'form-control beneficiaryRegister', :id => 'bankState'
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  District :
+  .col-sm-5
+    = text_field_tag 'bank[district]','', :class => 'form-control beneficiaryRegister', :id => 'bankDistrict'
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  City :
+  .col-sm-5
+    = text_field_tag 'bank[city]','', :class => 'form-control beneficiaryRegister', :id => 'bankCity'
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Branch :
+  .col-sm-5
+    = text_field_tag 'bank[branch]','', :class => 'form-control beneficiaryRegister', :id => 'bankBranch'
+.form-group
+  %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Address :
+  .col-sm-5
+    = text_field_tag 'bank[address]','', :class => 'form-control beneficiaryRegister', :id => 'bankAddress'

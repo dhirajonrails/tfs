@@ -1,0 +1,84 @@
+%script#transactionTemplate{type: 'text/html'}
+  -if transactions.present?
+    = paginate transactions, :window => 5 unless transactions.empty?
+    %div.dt_view_request_buttons_top
+      %input{id: "multi_status_change_done", class: "btn btn-primary btn-xs", value: 'Set Status Done', type: 'button'}
+    %table.table.table-bordered.table-striped.table-hover.content
+      %thead
+        %tr
+          %th{width:"25"}
+            %span.checkboxWrap
+              %input{type:'checkbox', class:'selectAll', name:'all', value:"all"}
+          %th
+          %th STATUS
+          %th DISTRIBUTOR DETAILS
+          %th MERCHANT DETAILS
+          %th TXN ID
+          %th TXN DATE
+          %th SENDER
+          %th BENEFICIARY NAME
+          %th BANK DETAILS
+          %th BANK
+          %th ACCOUNT NUMBER
+          %th IFSC CODE
+          %th AMT TO TRANSFER
+          %th CHARGES
+          %th TOTAL
+          %th BALANCE
+          %th REMARK
+          %th ADMIN REMARK
+      %tbody
+        - transactions.each do |transaction|
+          - sender = transaction.sender rescue nil
+          - merchant = transaction.merchant rescue nil
+          - distributor = transaction.distributor rescue nil
+          - bank_detail = transaction.beneficiary.bank_detail rescue nil
+          %tr
+            %td
+              %span.checkboxWrap
+                %input{type:'checkbox', class: 'selectBox', name:'transactions', id:"#{transaction.id}", value:"#{transaction.id}"}
+            %td
+              .hidden-sm.hidden-xs.action-buttons
+                / - if transaction.status == 'In Process' || transaction.status == 'REJECT/RETURN'
+                %a.green{ href: edit_admin_sender_path(transaction) }
+                  %i.ace-icon.fa.fa-pencil.bigger-130
+                - if transaction.status != 'REJECT/RETURN'    
+                  %a.red.delete{href: admin_sender_path(transaction), 'data-method': :delete }
+                    %i.ace-icon.fa.fa-trash-o.bigger-130             
+            %td
+              = transaction.status rescue nil
+            %td
+              = distributor_detail(distributor) rescue nil
+            %td
+              = merchant_details(merchant) rescue nil
+            %td
+              = transaction.txt_id rescue nil
+            %td
+              = format_date(transaction.created_at) rescue nil 
+            %td
+              = sender_detail(sender) rescue nil
+            %td
+              = transaction.beneficiary.try(:name) rescue nil
+            %td
+              = bank_details(bank_detail) rescue nil
+            %td
+              = bank_detail.try(:name) rescue nil
+            %td
+              = transaction.beneficiary.try(:account_number) rescue nil
+            %td
+              = transaction.beneficiary.try(:ifsc_code) rescue nil
+            %td
+              = transaction.amount rescue nil
+            %td
+              = transaction.charges rescue nil
+            %td
+              = "#{transaction.amount + transaction.charges}"  rescue nil
+            %td
+              = transaction.current_limit  rescue nil
+            %td
+              = transaction.merchant_remark  rescue nil  
+            %td
+              = transaction.admin_remark  rescue nil  
+    = paginate transactions, :window => 5 unless transactions.empty?
+  - else
+    %h4 YOU HAVE NO SERVICE REQUEST

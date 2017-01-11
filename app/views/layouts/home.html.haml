@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %title Traverse eko life fundtion
+    / for-mobile-apps
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "Tycoon Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, \nSmartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design", :name => "keywords"}/
+    %script{:type => "application/x-javascript"}
+      addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+      function hideURLbar(){ window.scrollTo(0,1); }
+    / //for-mobile-apps
+    = stylesheet_link_tag 'uncompressed/bootstrap', :media => "all"
+    = stylesheet_link_tag 'style4', :media => "all"
+
+    %link{:href => "//fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic,900,900italic", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic", :rel => "stylesheet", :type => "text/css"}/
+    / start-smoth-scrolling
+
+    / //here ends scrolling icon
+
+    = javascript_include_tag "jquery-2.1.4.min.js"
+    = javascript_include_tag "move-top.js"
+    = javascript_include_tag "easing.js"
+    = javascript_include_tag "waypoints.min.js"
+    = javascript_include_tag "bootstrap.js"
+    = javascript_include_tag "counterup.min.js"
+
+    :javascript
+      jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){   
+          event.preventDefault();
+          $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+      });
+    / start-smoth-scrolling
+  %body
+    = yield

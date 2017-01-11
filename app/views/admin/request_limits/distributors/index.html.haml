@@ -1,0 +1,74 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1 DISTRIBUTOR LIMIT REQUESTS
+        .row.mt22
+          .col-xs-12
+            = form_tag '/admin/request_limits/distributor/search', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchAdminTransactionForm'} do |f|
+              .col-sm-12
+                .row
+                  .col-sm-1
+                    %lable
+                      Search
+                  .col-sm-2  
+                    = text_field_tag :search,params[:search], class: 'form-control searchTrans', :id => "distributor_id"
+                  .col-sm-1
+                    %lable
+                      Status
+                  .col-sm-2   
+                    = select_tag :status, options_for_select(RequestLimit::STATUS.collect{ |k, v| [v, k] }), :selected => params[:status], include_blank: true                    
+                  .col-sm-2
+                    = submit_tag "GO", value: 'search', :class =>"btn btn-info"          
+            .row
+              .col-xs-12
+                %div
+                - if @request_limits.present?
+                  = paginate @request_limits, :window => 5 unless @request_limits.empty?
+                  %table.table.table-bordered.table-striped.table-hover.content
+                    %thead
+                      %tr
+                        %th 
+                        %th DistributorID
+                        %th DistributorName
+                        %th RequestDate
+                        %th TrackingID
+                        %th BankName
+                        %th RequestLimit
+                        %th RequestStatus
+                        %th StatusDate
+                        %th REMARK
+                    %tbody
+                      - @request_limits.each do |request_limit|
+                        - distributor = Distributor.find(request_limit.requestable_id)
+                        %tr
+                          %td
+                            .hidden-sm.hidden-xs.action-buttons
+                              - if request_limit.status == 'On Hold'
+                                %a.green{ href: edit_admin_request_limits_distributor_path(request_limit) }
+                                  %i.ace-icon.fa.fa-pencil.bigger-130
+                              %a.red.delete{href: admin_request_limits_distributor_path(request_limit), 'data-method': :delete, confirm: 'Are you sure?' }
+                                %i.ace-icon.fa.fa-trash-o.bigger-130
+                          %td
+                            = distributor.user.mobile rescue nil
+                          %td 
+                            = fullname(distributor.try(:profile).try(:first_name),distributor.try(:profile).try(:last_name)) rescue nil
+                          %td
+                            = format_date(request_limit.created_at) rescue nil
+                          %td
+                            = request_limit.tracking_id rescue nil
+                          %td
+                            = request_limit.try(:bank) rescue nil
+                          %td
+                            = request_limit.try(:amount) rescue nil
+                          %td
+                            = request_limit.try(:status) rescue nil
+                          %td
+                            = status_date(request_limit.created_at, request_limit.updated_at) rescue nil
+                          %td
+                            = request_limit.remark  
+                  = paginate @request_limits, :window => 5 unless @request_limits.empty?
+                - else
+                  %h4.mt20 THERE ARE NO PENDING DISTRIBUTOR REQUEST LIMITS
+    .rclear
+

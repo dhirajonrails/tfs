@@ -1,0 +1,163 @@
+#sidebar.sidebar.responsive
+  :javascript
+    try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+    $(document).ready(function(){
+    })
+  %ul.nav.nav-list
+    - if current_user.has_role?('super_admin')
+      %li
+        %a{ "href"=>"/admin/dashboard" }
+          %i.menu-icon.fa.fa-tachometer
+          %span.menu-text Dashboard
+        %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'normal_view_request'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{ "href"=> admin_senders_path }
+          %i.menu-icon.fa.fa-file-o
+          %span.menu-text VIEW REQUEST
+          %span.badge.badge-primary#view_request_badge
+        %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'quick_view_request'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{ "href"=> quick_request_admin_senders_path }
+          %i.menu-icon.fa.fa-file-o
+          %span.menu-text QUICK REQUEST
+          %span.badge.badge-primary#quick_request_badge
+        %b.arrow
+    - if current_user.has_role?('super_admin') || (current_user.roles.pluck(:name) & ['distributor_view', 'distributor_new', 'distributor_add_limit','distributor_less_limit', 'distributor_view_limit', 'distributor_limit_history']).any?
+      %li
+        %a.dropdown-toggle{"href"=>"#"}
+          %i.menu-icon.fa.fa-desktop
+          %span.menu-text DISTRIBUTORS
+          %b.arrow.fa.fa-angle-down
+        %b.arrow
+        %ul.submenu
+          - if current_user.has_role?('super_admin') || (['admin', 'distributor_new'] - current_user.roles.pluck(:name)).empty?
+            %li.active
+              %a{"href"=>'/admin/distributors/new', remote: true}
+                %i.menu-icon.fa.fa-caret-right
+                | Add Distributor
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'distributor_view'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"#{admin_distributors_path }"}
+                %i.menu-icon.fa.fa-caret-right
+                | View Distributor
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'distributor_add_limit'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/distributors/add_limit"}
+                %i.menu-icon.fa.fa-caret-right
+                | Add Limit
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'distributor_less_limit'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/distributors/less_limit"}
+                %i.menu-icon.fa.fa-caret-right
+                | Less Limit
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'distributor_view_limit'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/distributors/view_limit"}
+                %i.menu-icon.fa.fa-caret-right
+                | View Limit
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'distributor_limit_history'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/distributors/limit_history"}
+                %i.menu-icon.fa.fa-caret-right
+                | Limit History
+              %b.arrow
+    - if current_user.has_role?('super_admin') || (current_user.roles.pluck(:name) & ['merchant_view', 'merchant_new', 'merchant_add_limit','merchant_less_limit', 'merchant_view_limit', 'merchant_limit_history']).any?
+      %li
+        %a.dropdown-toggle{"href"=>""}
+          %i.menu-icon.fa.fa-desktop
+          %span.menu-text MERCHANT
+          %b.arrow.fa.fa-angle-down
+        %b.arrow
+        %ul.submenu
+          - if current_user.has_role?('super_admin') || (['admin', 'merchant_new'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/merchants/new"}
+                %i.menu-icon.fa.fa-caret-right
+                | Add Merchant
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'merchant_view'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"#{admin_merchants_path}"}
+                %i.menu-icon.fa.fa-caret-right
+                | View Merchant
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'merchant_add_limit'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/merchants/add_limit"}
+                %i.menu-icon.fa.fa-caret-right
+                | Add Limit
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'merchant_less_limit'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/merchants/less_limit"}
+                %i.menu-icon.fa.fa-caret-right
+                | Less Limit
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'merchant_view_limit'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/merchants/view_limit"}
+                %i.menu-icon.fa.fa-caret-right
+                | View Limit
+              %b.arrow
+          - if current_user.has_role?('super_admin') || (['admin', 'merchant_limit_history'] - current_user.roles.pluck(:name)).empty?
+            %li
+              %a{" href"=>"/admin/merchants/limit_history"}
+                %i.menu-icon.fa.fa-caret-right
+                | Limit History
+              %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'merchant_limit_request_view'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{ href: admin_request_limits_merchants_path }
+          %i.menu-icon.fa.fa-list
+          %span.menu-text MER LIMIT REQUEST
+          %span.badge.badge-primary#mer_limit_request_badge
+        %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'distributor_limit_request_view'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{href: admin_request_limits_distributors_path }
+          %i.menu-icon.fa.fa-pencil-square-o
+          %span.menu-text DIST LIMIT REQUEST
+          %span.badge.badge-primary#dis_limit_request_badge
+        %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'flash_notification'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{"href"=>"/admin/notification"}
+          %%i.menu-icon.fa.fa-pencil-square-o
+          %span.menu-text NOTIFICATION
+        %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'message_notification'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{"href"=>"/admin/message_sender"}
+          %%i.menu-icon.fa.fa-envelope
+          %span.menu-text MESSAGE NOTIFICATION
+        %b.arrow      
+    - if current_user.has_role?('super_admin') || (['admin', 'bank_detail'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{"href"=>"/admin/senders/bank_detail"}
+          %%i.menu-icon.fa.fa-pencil-square-o
+          %span.menu-text BANK DETAIL
+        %b.arrow
+    %li
+      %a{"href"=>"/change_password"}
+        %%i.menu-icon.fa.fa-pencil-square-o
+        %span.menu-text CHANGE PASSWORD
+      %b.arrow
+    - if current_user.has_role?('super_admin') || (['admin', 'change_user_password'] - current_user.roles.pluck(:name)).empty?
+      %li
+        %a{"href"=>"/change_user_password"}
+          %%i.menu-icon.fa.fa-pencil-square-o
+          %span.menu-text CHANGE USER PASSWORD
+        %b.arrow
+
+  #sidebar-collapse.sidebar-toggle.sidebar-collapse
+    %i.ace-icon.fa.fa-angle-double-left{"data-icon1"=>("ace-icon fa fa-angle-double-left"),"data-icon2"=>("ace-icon fa fa-angle-double-right") }
+
+  :javascript
+    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}

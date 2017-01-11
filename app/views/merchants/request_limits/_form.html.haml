@@ -1,0 +1,33 @@
+= form_for(@request_limit, :url => merchants_request_limits_path,:html => {:class => "form-horizontal", :role => "form", id: 'merchantRequestForm'}) do |f|
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Merchant ID :
+    .col-sm-5
+      = text_field_tag :merchant_id, @merchant.user.mobile,'maxlength'=>10, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :readonly => ''
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Name :
+    .col-sm-5
+      = text_field_tag :name, fullname(@merchant.profile.first_name, @merchant.profile.last_name), :class => 'col-xs-12 col-sm-12', :id => 'form-input-readonly', :readonly => ''
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Deposited in Bank :
+    .col-sm-5
+      = f.text_field :bank, :class => 'form-control', :id => 'form-field-8', :placeholder => ("Bank Name")
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  Required Limit :
+    .col-sm-5
+      = f.text_field :amount, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("Required Limit")
+  .form-group
+    %label.col-sm-3.control-label.no-padding-right{for: "form-field-1-1" }  DP Tracking ID :
+    .col-sm-5
+      = f.text_field :tracking_id, :class => 'col-xs-12 col-sm-12', :id => 'form-field-1', :placeholder => ("DP Tracking ID")    
+  .form-group{:style => "border:1px solid red;padding:5px;background:currentcolor;"}
+    %label.col-sm-3.control-label.no-padding-right
+      %span{:style => "color:red;font-size:20px;"} Quick Limit
+      = check_box_tag "request_limit[quick_request]",true,false, :type => "checkbox"
+  .form-group
+    .clearfix.form-actions
+      .col-md-offset-3.col-md-9
+        %input.btn.btn-info#submitRegister{name: "REQUEST LIMIT", type: "submit", value: "REQUEST LIMIT"}
+          %i.ace-icon.fa.fa-check.bigger-110
+        &nbsp; &nbsp; &nbsp;
+        %input.btn.btn-info#resetRegister{name: "Reset", type: "button", value: "Reset"}
+          %i.ace-icon.fa.fa-undo.bigger-110

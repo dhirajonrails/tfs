@@ -1,0 +1,24 @@
+%table#sample-table-2.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th Distributor
+      %th Distributor_ID
+      %th Merchant Id
+      %th Merchant Name
+      %th Balance
+      %th Quick Balance
+  %tbody
+    - @merchants.each do |merchant|  
+      %tr 
+        %td
+          = merchant.distributor.profile.first_name rescue nil
+        %td
+          = merchant.distributor.user.mobile rescue nil
+        %td 
+          = merchant.user.mobile rescue nil
+        %td
+          = fullname(merchant.try(:profile).try(:first_name), merchant.try(:profile).try(:last_name)) rescue nil
+        %td
+          = merchant.balance_limit rescue nil
+        %td
+          = merchant.quick_limit rescue nil  

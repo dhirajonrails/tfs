@@ -1,0 +1,30 @@
+#navbar.navbar.navbar-default
+  :javascript
+    try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+  #navbar-container.navbar-container
+    %button#menu-toggler.navbar-toggle.menu-toggler.pull-left
+      %span.sr-only Toggle sidebar
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    .navbar-header.pull-left
+      %a.navbar-brand{"href"=>"/"} 
+        %small
+        %i.fa.fa-leaf
+        Traverse Eko Life Foundation
+    .navbar-buttons.navbar-header.pull-right{"role"=>"navigation" }
+      %ul.nav.ace-nav
+        %li.light-blue
+          - if user_signed_in?
+            .btn-group.pull-right
+              %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                - if current_user.merchant.present?
+                  Welcome #{current_user.merchant.profile.first_name}
+                - elsif current_user.distributor.present?
+                  Welcome #{current_user.distributor.profile.first_name}
+                - else
+                  Welcome Admin
+                %span.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to "Logout", destroy_user_session_path, :method => :delete 

@@ -1,0 +1,4 @@
+- if @transactions.present?
+	$("#transactionsBox").html(<%= escape_javascript(render :partial => 'transactions', :locals => {:transactions => @transactions}) %>)
+- else
+	alert('No Data Found')

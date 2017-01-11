@@ -1,0 +1,100 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header
+        %h1 QUICK REQUESTS
+        .row
+          .col-sm-12
+            .row
+              .col-sm-12
+                .row.mt22
+                  .col-sm-8
+                    .row
+                      %ul.nav.ace-nav
+                        %li.light-blue
+                          .btn-group.pull-right.downlodexcelFile
+                            %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                              Download EXCEL
+                              %span.caret
+                            %ul.dropdown-menu
+                              %li
+                                %a.btn.btn-info{ :href => '/admin/senders/download_quick_csv?format=xls' } AXIS IMPS
+                              %li
+                                %a.btn.btn-info{ :href => '/admin/senders/download_imps_self_report?format=xls' } Self Report                                
+                  .col-sm-4
+                    .row
+                      .col-sm-12
+                        %span Total No of Transaction:
+                        %b
+                          = @total_transactions
+                    .row
+                      .col-sm-12
+                        %span Total Amount Transfer:
+                        %b
+                          = @total_transfer
+                    .row
+                      .col-sm-12
+                        %span Total Charges: 
+                        %b
+                          = @total_charges
+                .col-sm-12.mt15
+                = form_tag '/admin/senders/search', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchTransactionForm'} do |f|
+                  .col-sm-12
+                    .row
+                      .col-sm-3
+                        .col-sm-12
+                          .col-sm-6
+                            %label Start Date:
+                          .col-sm-6
+                            = text_field_tag :start,params[:start], class: 'form-control date-picker', "data-date-format" => "dd-mm-yyyy", :id => "startDate"
+                        .col-sm-12.mt15
+                          .col-sm-6
+                            %lable
+                              End Date:
+                          .col-sm-6
+                            = text_field_tag :end,params[:end], class: 'form-control date-picker', :id => "endDate"
+                      .col-sm-3
+                        .col-sm-12
+                          .col-sm-4
+                            %lable
+                              Mer Id
+                          .col-sm-8
+                            = text_field_tag :merchant_id,params[:merchant_id], class: 'form-control', :id => "merchant_id"
+                            = hidden_field_tag :quick_request, true
+                        .col-sm-12.mt15
+                          .col-sm-4
+                            %lable
+                              Dist Id                          
+                          .col-sm-8
+                            = text_field_tag :distributor_id, params[:distributor_id], class: 'form-control', :id => "distributor_id"
+                      .col-sm-3
+                        .col-sm-12
+                          .col-sm-5
+                            %label
+                              Search:
+                          .col-sm-7
+                            = text_field_tag :search,params[:search], class: 'form-control searchTrans', id: "search"      
+                        .col-sm-12.mt15
+                          .col-sm-5
+                            %label.col-sm-12.control-label.no-padding-right{for: "form-field-1-1"} STATUS:
+                          .col-sm-7
+                            = select_tag :status, options_for_select(Transaction::STATUS.collect{ |k, v| [v, k] }), :selected => params[:status], include_blank: true
+                      .col-sm-3
+                        .col-sm-12
+                          = submit_tag "GO", value: 'search', :class =>"btn btn-info"
+                  
+          %div
+            %section.transactionContent{"data-transaction-list" => "#{@transactions.to_json()}"}
+            #transactionDetails
+              = render 'transactions', transactions: @transactions
+
+
+  = javascript_include_tag 'transactions.js'
+
+  :javascript
+    $(document).ready(function(){
+      $('#startDate').mask('99-99-9999');
+      $('#endDate').mask('99-99-9999');
+      sender = new window.TransactionDetails();
+      sender.init();
+    })

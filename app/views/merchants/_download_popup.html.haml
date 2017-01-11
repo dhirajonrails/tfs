@@ -1,0 +1,54 @@
+#downloadServiceRequestModal.modal.fade.right{"aria-labelledby" => "downloadServiceRequestModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#downloadServiceRequestModalLabel.modal-title 
+          DOWNLOAD SERVICE REQUEST
+      .modal-body
+        = form_tag download_service_request_senders_path(format: :xls), method: 'get',:class => "form-horizontal download-form", :role => "form", id: 'downloadServiceRequestForm' do |f| 
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} Start Date :
+            = text_field_tag :start, params[:start], class: 'form-control date-picker searchTrans', :id => "startDownloadDate", required: 'required'
+          .form-group
+            %label.col-sm-3.control-label.no-padding-right{:for => "form-field-1"} End Date :
+            = text_field_tag :end, params[:end], class: 'form-control date-picker searchTrans', :id => "endDownloadDate", required: 'required'
+          .form-group
+            .col-sm-12
+              .col-sm-6
+                %button.btn.btn-default{:type => "submit"} DOWNLOAD
+                %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} CLOSE
+
+  :javascript
+    $(function() {
+      var dateFormat, from, getDate, to;
+      dateFormat = 'dd-mm-yy';
+      from = $('#startDownloadDate').datepicker({
+        dateFormat: dateFormat,
+        defaultDate: '+1w',
+        changeMonth: true,
+        numberOfMonths: 3
+      }).on('change', function() {
+        to.datepicker('option', 'minDate', getDate(this));
+      });
+      to = $('#endDownloadDate').datepicker({
+        dateFormat: dateFormat,
+        defaultDate: '+1w',
+        changeMonth: true,
+        numberOfMonths: 3
+      }).on('change', function() {
+        from.datepicker('option', 'maxDate', getDate(this));
+      });
+      getDate = function(element) {
+        var date, error;
+        date = void 0;
+        try {
+          date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (_error) {
+          error = _error;
+          date = null;
+        }
+        return date;
+      };
+    });

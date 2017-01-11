@@ -1,0 +1,21 @@
+.col-sm-6
+  .widget-box
+    .widget-header
+      %h4.widget-title.lighter.smaller
+        %i.ace-icon.fa.fa-comment.blue
+        Merchant Limit History
+    .widget-body
+      .widget-main.no-padding
+        .dialogs#merchantLimitHistory
+          = render partial: 'admin/merchants/log', locals: {limit_history: limit_history}
+          - unless limit_history.current_page == limit_history.total_pages 
+            %p#view-more-merchant-log
+              %a{href: 'javascript:void(0)'} view more
+        %form
+          .form-actions
+            .input-group
+              %input.form-control{:name => "message", :placeholder => "Type your message here ...", :type => "text"}/
+              %span.input-group-btn
+                %button.btn.btn-sm.btn-info.no-radius{:type => "button"}
+                  %i.ace-icon.fa.fa-share
+                  SEARCH

@@ -1,0 +1,67 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ 
+ *= require bootstrap.min
+ *= require font-awesome.min
+ *= require jquery-ui.custom.min
+ *= require uncompressed/chosen
+ *= require jquery-ui.min
+ *= require datepicker
+ *= require colorpicker
+ *= require uncompressed/ace-fonts
+ *= require uncompressed/ace
+ *= require uncompressed/ace.min
+ *= require uncompressed/ace-skins
+ *= require uncompressed/ace-rtl
+ *= require style
+ *= require styles
+ */
+
+.table-wrapper
+{
+  border: 1px solid red;
+  width: auto;
+  height: auto;
+  overflow: auto;
+}
+
+table
+{
+  border: 1px solid black;
+  margin-right: 20px;
+}
+
+td
+{
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+}
+
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}

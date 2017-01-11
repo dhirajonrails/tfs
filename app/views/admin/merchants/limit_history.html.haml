@@ -1,0 +1,80 @@
+.main-content.widthalign
+  .page-content
+    .page-content-area
+      .page-header.rcorners1
+        %h1
+          MERCHANT LIMIT HISTORY
+      .row
+        .col-xs-12
+          .row
+            = form_tag '/admin/merchants/search_limit_history', method: 'get',:html => {:class => "form-horizontal", :role => "form", id: 'searchMerchantForm'} do |f|
+              %a.btn.btn-info{ :href => '/admin/merchants/download_limit_history?format=xls' } DOWNLOAD
+              .col-sm-12
+                .col-sm-1
+                  %lable
+                    Search                          
+                .col-sm-2  
+                  = text_field_tag :search, params[:search], class: 'form-control', :id => "merchant_id"
+                .col-sm-1
+                  %lable
+                    RequestType
+                .col-sm-2
+                  = select_tag :request, options_for_select(ChangeLimit::TYPE.collect{ |k, v| [v, k] }), :selected => params[:request], include_blank: true                    
+                .col-sm-1
+                  %lable
+                    Status
+                .col-sm-2
+                  = select_tag :status, options_for_select(ChangeLimit::STATUS.collect{ |k, v| [v, k] }), :selected => params[:status], include_blank: true                    
+                .col-sm-2
+                  = submit_tag "GO", value: 'search', :class =>"btn btn-info"              
+            .col-xs-12
+              %div
+                - if @limit_history.present?
+                  = paginate @limit_history, :window => 5              
+                  %table#sample-table-2.table.table-striped.table-bordered.table-hover
+                    %thead
+                      %tr
+                        %th Creation Date
+                        %th Distributor
+                        %th Merchant ID
+                        %th Merchant Name
+                        %th STATUS
+                        %th Note
+                        %th Last Limit
+                        %th Add Limit
+                        %th Less Limit
+                        %th New Limit
+                        %th Quick
+                        %th Remark
+                    %tbody
+                      - @limit_history.each do |history| 
+                        - merchant = Merchant.find(history.changable_id) 
+                        - distributor = Distributor.where(mobile: history.distributor_mobile).first rescue nil
+                        %tr
+                          %td
+                            = format_date(history.created_at)
+                          %td 
+                            = distributor_detail(distributor) rescue nil
+                          %td
+                            = merchant.user.mobile rescue nil
+                          %td 
+                            = fullname(merchant.try(:profile).try(:first_name), merchant.try(:profile).try(:last_name)) rescue nil
+                          %td
+                            = history.status rescue nil  
+                          %td
+                            = history.note rescue nil
+                          %td 
+                            = history.previous_limit rescue nil
+                          %td 
+                            = add_limit(history.action, history.amount) rescue nil
+                          %td 
+                            = less_limit(history.action, history.amount) rescue nil
+                          %td 
+                            = history.current_limit rescue nil
+                          %td 
+                            = quick_check(history) rescue nil
+                          %td
+                            = history.remark rescue nil 
+                  = paginate @limit_history, :window => 5
+                -else   
+                  NO DATA FOUND                                  
